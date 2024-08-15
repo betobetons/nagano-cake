@@ -1,2 +1,7 @@
 <h1>Public::Customers#unsubscribe</h1>
 <p>Find me in app/views/public/customers/unsubscribe.html.erb</p>
+エンドユーザ#退会確認画面
+<%= link_to "退会しない", customers_my_page_path %>
+
+退会処理をするアクションへのlink (このアクションは後に定義する)
+<%= link_to "退会する", customers_withdraw_path, method: :patch, data: { confilm: "本当に退会しますか？" } %>

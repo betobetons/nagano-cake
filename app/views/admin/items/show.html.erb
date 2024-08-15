@@ -1,2 +1,18 @@
-<h1>Admin::Items#show</h1>
-<p>Find me in app/views/admin/items/show.html.erb</p>
+<h1>商品詳細</h1>
+
+<p>商品名 <%= @item.name %></p><br>
+<p>商品説明 <%= @item.description %></p><br>
+ジャンル<br><%= @item.category.name %>
+<p>
+税込み価格<br>
+(税抜き価格)
+</p>
+<p><%= (@item.price * 1.1).floor %>(<%= @item.price %>)円</p>
+販売ステータス
+<% if @item.is_active == true %>
+  販売中
+<% else %>
+  販売停止中
+<% end %>
+<br>
+<%= link_to "編集する", edit_admin_item_path(@item) %>
