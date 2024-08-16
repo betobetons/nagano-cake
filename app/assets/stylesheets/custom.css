@@ -1,3 +1,8 @@
+.logo-img {
+    height: 70px; /* 画像の高さを指定 */
+    width: auto; /* 自動的に幅を調整 */
+}
+
 .custom-header {
     background-color: #6f5436;
     height: 80px;
