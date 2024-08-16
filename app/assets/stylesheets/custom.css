@@ -1,6 +1,6 @@
 .logo-img {
-    height: 70px; /* 画像の高さを指定 */
-    width: auto; /* 自動的に幅を調整 */
+    height: 70px;
+    width: auto;
 }
 
 .custom-header {
@@ -11,10 +11,10 @@
 }
 
 .hover-effect {
-    color: #f8f9fa !important; /* 文字色を白に設定 */
-    transition: color 0.3s ease;
+    color: #f8f9fa;
+    transition: color 0.3s ease; /* 文字色の変更をスムーズに */
 }
 
 .hover-effect:hover {
-    color: #f6ae54 !important;
+    color: #f6ae54; /* マウスオーバー時の文字色 */
 }
