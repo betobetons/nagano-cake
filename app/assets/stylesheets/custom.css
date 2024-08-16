@@ -1,0 +1,15 @@
+.custom-header {
+    background-color: #6f5436;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+.hover-effect {
+    color: #f8f9fa !important; /* 文字色を白に設定 */
+    transition: color 0.3s ease;
+}
+
+.hover-effect:hover {
+    color: #f6ae54 !important;
+}
