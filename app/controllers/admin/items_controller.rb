@@ -4,7 +4,7 @@ class Admin::ItemsController < ApplicationController
   end
 
   def index
-    @item = Item.all
+    @items = Item.all
   end
 
   def show
@@ -24,6 +24,17 @@ class Admin::ItemsController < ApplicationController
       render :new
     end
   end
+
+  def update
+    @categories = Category.all
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
+      redirect_to admin_items_path, notice: "商品を編集しました"
+    else
+      redirect_to edit_admin_item_path(@item)
+    end
+  end
+
 
   private
   def item_params

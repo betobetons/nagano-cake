@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :orders, only: %i[show]
     resources :customers, only: %i[show index edit]
     resources :categories, only: %i[index edit create update]
-    resources :items, only: %i[index new show edit create]
+    resources :items, only: %i[index new show edit create update]
     get "/" => "homes#top"
   end
 
@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     get '/about', to:'homes#about', as:'about'
     resources :items, only: %i[index show]
-    resources :addresses, only: %i[index edit]
+    resources :addresses, only: %i[index edit create destroy update]
     resources :carts, only: %i[index]
     resources :orders, only: %i[index show new] do
       collection do
