@@ -25,12 +25,14 @@ Rails.application.routes.draw do
     resources :items, only: %i[index show]
     resources :addresses, only: %i[index edit create destroy update]
     resources :carts, only: %i[index]
+    # resources :customers, only: %i[show update edit]
     resources :orders, only: %i[index show new] do
       collection do
         get 'confirm'
         get 'complete'
       end
     end
+    patch "customers/information/edit" => "customers#update"
     patch "customers/withdraw" => "customers#withdraw"
     get "customers/unsubscribe" => "customers#unsubscribe"
     get "customers/information/edit" => "customers#edit"
