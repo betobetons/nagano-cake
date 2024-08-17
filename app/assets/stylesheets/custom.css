@@ -1,0 +1,20 @@
+.logo-img {
+    height: 70px;
+    width: auto;
+}
+
+.custom-header {
+    background-color: #6f5436;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+.hover-effect {
+    color: #f8f9fa;
+    transition: color 0.3s ease; /* 文字色の変更をスムーズに */
+}
+
+.hover-effect:hover {
+    color: #f6ae54; /* マウスオーバー時の文字色 */
+}
