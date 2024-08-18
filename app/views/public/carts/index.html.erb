@@ -12,19 +12,19 @@
 
     <tbody>
       <% @carts.each do |cart| %>
-        <%= form_with model: cart, url: carts_path do |f| %>
+        <%= form_with model: cart, url: cart_path(cart) do |f| %>
         <tr>
           <td><%= image_tag cart.item.image, size: "100x100" %><%= cart.item.name %></td>
           <td><%= (cart.item.price * 1.1).floor %></td>
-          <td><%= f.select :quantity, *[1..10] %><%= f.submit "変更"%></td>
+          <td><%= f.select :quantity, *[1..10] %><%= f.submit "変更" %></td>
           <td><%= (cart.item.price * 1.1 * cart.quantity).floor %></td>
-          <td><%= link_to "削除" %></td>
+          <td><%= link_to "削除", cart_path(cart), method: :delete %></td>
         </tr>
         <% end %>
       <% end %>
     </tbody>
   </thead>
-  
-  
+
+
 </table>
 
