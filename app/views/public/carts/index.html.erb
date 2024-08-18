@@ -1,2 +1,30 @@
-<h1>Public::Carts#index</h1>
-<p>Find me in app/views/public/carts/index.html.erb</p>
+<h1>ショッピングカート</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>商品名</th>
+      <th>単価(税込み)</th>
+      <th>数量</th>
+      <th>小計</th>
+      <th></th>
+    </tr>
+
+    <tbody>
+      <% @carts.each do |cart| %>
+        <%= form_with model: cart, url: carts_path do |f| %>
+        <tr>
+          <td><%= image_tag cart.item.image, size: "100x100" %><%= cart.item.name %></td>
+          <td><%= (cart.item.price * 1.1).floor %></td>
+          <td><%= f.select :quantity, *[1..10] %><%= f.submit "変更"%></td>
+          <td><%= (cart.item.price * 1.1 * cart.quantity).floor %></td>
+          <td><%= link_to "削除" %></td>
+        </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </thead>
+  
+  
+</table>
+

@@ -1,7 +1,6 @@
 <%= flash[:notice] %>
 <h1>配送先登録 / 一覧</h1>
-
-<%= form_with model: @address do |f| %>
+<%= form_with model: @address, url: addresses_path, method: :post do |f| %>
   <table>
     <tr>
       <td>郵便番号(ハイフンなし)</td>

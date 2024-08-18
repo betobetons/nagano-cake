@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     get '/about', to:'homes#about', as:'about'
     resources :items, only: %i[index show]
     resources :addresses, only: %i[index edit create destroy update]
-    resources :carts, only: %i[index]
+    resources :carts, only: %i[index create]
     # resources :customers, only: %i[show update edit]
     resources :orders, only: %i[index show new] do
       collection do

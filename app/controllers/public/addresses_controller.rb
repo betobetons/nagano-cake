@@ -12,7 +12,8 @@ class Public::AddressesController < ApplicationController
       flash[:notice] = '住所が作成されました。'
       redirect_to addresses_path
     else
-      @address = current_customer.addresses
+      @addresses = current_customer.addresses
+      @address = Address.new
       flash[:notice] = "登録に失敗しました"
       redirect_back(fallback_location: root_path)
     end
@@ -28,6 +29,8 @@ class Public::AddressesController < ApplicationController
       flash[:notice] = '編集に成功しました。'
       redirect_to addresses_path
     else
+      @addresses = current_customer.addresses
+      @address = Address.new
       flash[:notice] = "編集に失敗しました"
       redirect_back(fallback_location: root_path)
     end

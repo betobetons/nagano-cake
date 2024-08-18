@@ -20,12 +20,29 @@
                 <%= image_tag 'logo.png', alt: 'NaganoCake Logo', class: 'logo-img' %>
             <% end %>
         </div>
+        
+        
         <div>
-            <%= link_to 'About', about_path, class: 'text-decoration-none hover-effect mx-3' %>
-            <%= link_to '商品一覧', items_path, class: 'text-decoration-none hover-effect mx-3' %>
-            <%= link_to '新規登録', new_customer_registration_path, class: 'text-decoration-none hover-effect mx-3' %>
-            <%= link_to 'ログイン', new_customer_session_path, class: 'text-decoration-none hover-effect mx-3' %>
+            <% if customer_signed_in? %>
+                <%= link_to 'マイページ', customers_my_page_path, class: 'text-decoration-none hover-effect mx-3' %>
+                <%= link_to '商品一覧', items_path, class: 'text-decoration-none hover-effect mx-3' %>
+                <%= link_to 'カート', carts_path, class: 'text-decoration-none hover-effect mx-3' %>
+                <%= link_to 'ログアウト', destroy_customer_session_path, method: :delete, class: 'text-decoration-none hover-effect mx-3' %>
+            <% elsif admin_signed_in? %>
+                <%= link_to '商品一覧', admin_items_path, class: 'text-decoration-none hover-effect mx-3' %>
+                <%= link_to '会員一覧', admin_customers_path, class: 'text-decoration-none hover-effect mx-3' %>
+                <%= link_to '注文履歴一覧', admin_path, class: 'text-decoration-none hover-effect mx-3' %>
+                <%= link_to 'ジャンル一覧', admin_categories_path, class: 'text-decoration-none hover-effect mx-3' %>
+                <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'text-decoration-none hover-effect mx-3' %>
+            <% else %>
+                <%= link_to 'About', about_path, class: 'text-decoration-none hover-effect mx-3' %>
+                <%= link_to '商品一覧', items_path, class: 'text-decoration-none hover-effect mx-3' %>
+                <%= link_to '新規登録', new_customer_registration_path, class: 'text-decoration-none hover-effect mx-3' %>
+                <%= link_to 'ログイン', new_customer_session_path, class: 'text-decoration-none hover-effect mx-3' %>
+            <% end %>
         </div>
+        
+        
     </div>
 </header>
     <%= yield %>
