@@ -13,17 +13,10 @@ class Public::OrdersController < ApplicationController
     @order = Order.new(order_params)
   end
 
-  # def confirm
-  #   @order = Order.new(order_params)
-  #   @address = Address.find(params[:order][:address_id])
-  #   @order.post_code = @address.post_code
-  #   @order.address = @address.address
-  #   @order.name = @address.first_name + current_customer.last_name
-  #   selected_address = params[:order][:select_address]
-  # end
-
 def confirm
+  # @order = Order.new(order_params)
   @order_fee = 800
+  # @order.payment = params[:order][:payment].to_i
   @carts = current_customer.carts
   @cart_items= current_customer.carts.all
     # カートに入ってる商品の合計金額
@@ -39,9 +32,10 @@ def confirm
     @order.post_code = @address.post_code 
     @order.address = @address.address 
     @order.name = @address.name
+  # elsif params[:select_address] == 2
+      
   end
 end
-  # if params[:address] == 2
 
   def complete
   end
