@@ -20,10 +20,11 @@ class Public::CartsController < ApplicationController
   def update
     @cart = Cart.find(params[:id])
     if @cart.update(cart_params)
-      redirect_to carts_path
+      flash[:notice] = "カートが更新されました。"
     else
-      redirect_to carts_path
+      flash[:alert] = "カートの更新に失敗しました。"
     end
+    redirect_to carts_path
   end
 
   def destroy
@@ -40,8 +41,6 @@ class Public::CartsController < ApplicationController
   private
 
   def cart_params
-     params.require(:cart).permit(:quantity, :item_id)
-
+    params.require(:cart).permit(:quantity, :item_id)
   end
-
 end

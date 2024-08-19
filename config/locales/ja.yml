@@ -4,9 +4,13 @@ ja:
       payment:
         credit_card: "クレジットカード"
         transfer: "銀行振込"
+      address:
+        my_address: "ご自身の住所"
+        registered_address: "登録済み住所から選択"
+        new_address: "新しいお届け先"
   activerecord:
     attributes:
-        customer: 
+        customer:
           email: "メール"
           password: "パスワード"
           first_name: "名前"
@@ -32,7 +36,7 @@ ja:
     - 金
     - 土
     abbr_month_names:
-    - 
+    -
     - 1月
     - 2月
     - 3月
@@ -58,7 +62,7 @@ ja:
       long: "%Y年%m月%d日(%a)"
       short: "%m/%d"
     month_names:
-    - 
+    -
     - 1月
     - 2月
     - 3月

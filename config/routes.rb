@@ -33,7 +33,7 @@ Rails.application.routes.draw do
         get 'complete'
       end
     end
-    
+
     patch "customers/information/edit" => "customers#update"
     patch "customers/withdraw" => "customers#withdraw"
     get "customers/unsubscribe" => "customers#unsubscribe"
