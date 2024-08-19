@@ -32,6 +32,10 @@ class Public::CartsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
+  def destroy_all
+    Cart.where(customer_id: current_customer.id).destroy_all
+    redirect_back(fallback_location: root_path)
+  end
 
   private
 

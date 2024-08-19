@@ -1,2 +1,32 @@
-<h1>Public::Orders#new</h1>
-<p>Find me in app/views/public/orders/new.html.erb</p>
+<h1>注文情報入力</h1>
+<h2>支払方法</h2>
+<%= form_with model: @order, url: orders_path, method: :post do |f| %>
+<%= f.radio_button :payment, 0, checked: true %>クレジットカード<br>
+<%= f.radio_button :payment, 1 %>銀行振込
+
+<h2>お届け先</h2>
+<%= f.radio_button :select_address, 0, checked: true %>ご自身の住所<br>
+〒<%= current_customer.post_code %>
+<%= current_customer.address %><br>
+<%= current_customer.first_name %><%= current_customer.last_name %><br>
+<%= f.radio_button :select_address, 1 %>登録済住所から選択<br>
+<%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :address_display) %><br>
+<%= f.radio_button :select_address, 2 %>新しいお届け先<br>
+<div>
+  <table>
+    <tr>
+      <td>郵便番号(ハイフンなし)</td>
+      <td><%= f.text_field :post_code %></td>
+    </tr>
+    <tr>
+      <td>住所</td>
+      <td><%= f.text_field :address %></td>
+    </tr>
+    <tr>
+      <td>宛名</td>
+      <td><%= f.text_field :name %></td>
+    </tr>
+  </table>
+</div>
+<div><%= link_to "確認画面へ進む", confirm_orders_path %></div>
+<% end %>
