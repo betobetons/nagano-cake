@@ -6,10 +6,54 @@ class Public::OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
-    if @order.save
-      redirect_to confirm_orders_path
+    @order.customer_id = current_customer.id
+    @order.fee = 800
+    @carts = Cart.where(customer_id: current_customer.id)
+    ary = []
+    @carts.each do |cart|
+      ary << cart.item.price*cart.quantity
+    end
+    @cart_price = ary.sum
+    @order.total = @order.fee + @cart_price
+    @order.payment = params[:order][:payment]
+    if @order.payment == "credit_card"
+      @order.status = 1
     else
-      render :new
+      @order.status = 0
+    end
+  
+    selected_address_type = params[:order][:select_address]
+    case selected_address_type
+    when "my_address"
+      @order.post_code = current_customer.post_code
+      @order.address = current_customer.address
+      @order.name = current_customer.first_name + current_customer.last_name
+    when "registered_address"
+      Address.find(params[:order][:address_id])
+      selected = Address.find(params[:order][:address_id])
+      @order.post_code = selected.post_code
+      @order.address = selected.address
+      @order.name = selected.name
+    when "new_address"
+      @order.post_code = params[:order][:post_code]
+      @order.address = params[:order][:address]
+      @order.name = params[:order][:name]
+    end
+
+    if @order.save
+      if @order.status == 0
+        @carts.each do |cart|
+          OrderDetail.create!(order_id: @order.id, item_id: cart.item_id, price: cart.item.price, quantity: cart.quantity, making_status: 0)
+        end
+      else
+        @carts.each do |cart|
+          OrderDetail.create!(order_id: @order.id, item_id: cart.item_id, price: cart.item.price, quantity: cart.quantity, making_status: 1)
+        end
+      end
+      @carts.destroy_all
+      redirect_to complete_orders_path
+    else
+      render :items
     end
   end
 
@@ -18,10 +62,9 @@ class Public::OrdersController < ApplicationController
     @selected_address_type = params[:order][:select_address]  # select_addressの値を取得
     @order_fee = 800
     @carts = current_customer.carts
-    logger.debug "Selected address type: #{@selected_address_type}"
-    logger.debug "Order params: #{order_params.inspect}"
     @cart_items = current_customer.carts.all
-    @total = @cart_items.inject(0) { |sum, item| sum + item.sum_of_price }
+    @sub_total = @cart_items.inject(0) { |sum, item| sum + item.sum_of_price }
+    @total = @order_fee + @sub_total
     @payment = params[:order][:payment]
 
     # 選択された住所タイプに応じて住所情報を設定
@@ -47,6 +90,11 @@ class Public::OrdersController < ApplicationController
       @order_name = params[:order][:name]
     end
   end
+
+  def index
+    @orders = current_customer.orders.all
+  end
+
 
   private
 
