@@ -50,12 +50,6 @@
   <p><%= @order_name %></p>
 
 <%= form_with model: @order, url: orders_path, method: :post do |f| %>
-<!--多分このhidden_fieldになんやらかんやら呼び出して保存するんやと思う。違ったらｽﾏｿ-->
-  <!--%= f.hidden_field :payment %>-->
-  <!--%= f.hidden_field :post_code %>-->
-  <!--%= f.hidden_field :address %>-->
-  <!--%= f.hidden_field :name %>-->
-  <!--%= f.hidden_field :address_id %>-->
   <%= f.hidden_field :payment, :value => @order.payment %>
   <%= f.hidden_field :post_code, :value => @order_post_code %>
   <%= f.hidden_field :address, :value =>  @order_address %>

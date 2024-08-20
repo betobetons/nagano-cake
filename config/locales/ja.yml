@@ -8,6 +8,12 @@ ja:
         my_address: "ご自身の住所"
         registered_address: "登録済み住所から選択"
         new_address: "新しいお届け先"
+      status:
+        waiting_payment: "入金待ち"
+        checked_payment: "入金確認"
+        in_making: "制作中"
+        ready: "発送準備中"
+        finish: "発送済み"
   activerecord:
     attributes:
         customer:
