@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   }
   namespace :admin do
     resources :orders, only: %i[show]
-    resources :customers, only: %i[show index edit]
+    resources :customers, only: %i[show index edit update]
     resources :categories, only: %i[index edit create update]
     resources :items, only: %i[index new show edit create update]
     get "/" => "homes#top"
