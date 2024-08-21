@@ -41,13 +41,13 @@ class Public::OrdersController < ApplicationController
     end
 
     if @order.save
-      if @order.status == 0
+      if @order.status == 'checked_payment'
         @carts.each do |cart|
-          OrderDetail.create!(order_id: @order.id, item_id: cart.item_id, price: cart.item.price, quantity: cart.quantity, making_status: 0)
+          OrderDetail.create!(order_id: @order.id, item_id: cart.item_id, price: cart.item.price, quantity: cart.quantity, making_status: 'waiting_make')
         end
-      else
+      else @order.status == 'waiting_payment'
         @carts.each do |cart|
-          OrderDetail.create!(order_id: @order.id, item_id: cart.item_id, price: cart.item.price, quantity: cart.quantity, making_status: 1)
+          OrderDetail.create!(order_id: @order.id, item_id: cart.item_id, price: cart.item.price, quantity: cart.quantity, making_status: 'stop_making')
         end
       end
       @carts.destroy_all

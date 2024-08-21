@@ -7,7 +7,7 @@ class Admin::OrdersController < ApplicationController
   def update
     @order = Order.find(params[:id])
     @order.update(order_params)
-    @order_details = @order.order_details
+    @order_details = @order.order
     if @order.status == 1
       @order.order_details.update(making_status: 1)
     end
