@@ -8,7 +8,7 @@
   <%= f.label :payment_transfer, Order.payments_i18n[:transfer], for: 'payment_transfer' %>
   <h2>お届け先</h2>
   <!-- 自分の住所 -->
-  <%= f.radio_button :select_address, 'my_address', id: 'address_my_address' %>
+  <%= f.radio_button :select_address, 'my_address', id: 'address_my_address', checked: true %>
   <%= f.label :select_address, '自分の住所', for: 'address_my_address' %><br>
 
   <!-- 登録済み住所 -->
