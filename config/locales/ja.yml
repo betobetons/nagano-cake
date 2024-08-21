@@ -11,7 +11,7 @@ ja:
       status:
         waiting_payment: "入金待ち"
         checked_payment: "入金確認"
-        in_making: "制作中"
+        in_making: "製作中"
         ready: "発送準備中"
         finish: "発送済み"
     order_detail:

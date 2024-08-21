@@ -7,9 +7,10 @@ class Admin::OrdersController < ApplicationController
   def update
     @order = Order.find(params[:id])
     @order.update(order_params)
-    @order_details = @order.order
-    if @order.status == 1
+    if @order.status == 'checked_payment'
       @order.order_details.update(making_status: 1)
+    else @order.status == 'waiting_payment'
+      @order.order_details.update(making_status: 0)
     end
     flash[:notice] = "変更しました"
     redirect_back(fallback_location: root_path)
