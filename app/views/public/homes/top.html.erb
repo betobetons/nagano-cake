@@ -1,17 +1,35 @@
-<div>
-    ようこそ、ながのCAKEへ！<br>
-    このサイトは、ケーキ販売のECサイトになります。<br>
-    会員でない方も商品の閲覧はできますが、<br>
-    購入には会員登録が必要になります。
+<div class="d-flex justify-content-center align-items-start min-vh-100 flex-column" style="margin: 0; padding: 0;">
+  <div class="home-box mx-auto my-3">
+    <p class="home-text">ようこそ、ながのCAKEへ！<br>
+      このサイトは、ケーキ販売のECサイトになります。<br>
+      会員でない方も商品の閲覧はできますが、<br>
+      購入には会員登録が必要になります。
+    </p>
+  </div>
+
+  <div class="container mt-0 new-item">
+    <h2>新着商品</h2>
+    <div class="row justify-content-center">
+      <% @items.first(4).each do |item| %>
+        <div class="col-md-3 col-sm-6">
+          <div class="card w-100 bg-transparent border-0">
+            <%= link_to item_path(item.id) do %>
+              <div class="img-wrap"><%= image_tag item.image, size: '150x100' %></div>
+            <% end %>
+            <div class="card-body">
+              <p class="card-text"><%= item.name %></p>
+              <% if item.is_active %>
+                <p class="card-text">￥<%= item.price %></p>
+              <% else %>
+                <p class="card-text text-danger">販売停止中</p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="all-items-show-button my-3">
+      <div class="text-right"><%= link_to "全ての商品を見る»", items_path %></div>
+    </div>
+  </div>
 </div>
-
-
-<h1>新着商品</h1>
-<% @items.each do |item| %>
-  <%= link_to item_path(item.id) do %>
-    <%= image_tag item.image, size: '100x100' %>
-  <% end %>
-    <%= item.name %>
-    ￥<%= item.price %>
-<% end %>
-
