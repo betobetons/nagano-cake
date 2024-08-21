@@ -12,7 +12,8 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
   namespace :admin do
-    resources :orders, only: %i[show]
+    resources :order_details, only: %i[update]
+    resources :orders, only: %i[show index update]
     resources :customers, only: %i[show index edit update]
     resources :categories, only: %i[index edit create update]
     resources :items, only: %i[index new show edit create update]

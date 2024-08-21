@@ -6,7 +6,6 @@
   <br>
   <%= f.radio_button :payment, 'transfer', id: 'payment_transfer' %>
   <%= f.label :payment_transfer, Order.payments_i18n[:transfer], for: 'payment_transfer' %>
-
   <h2>お届け先</h2>
   <!-- 自分の住所 -->
   <%= f.radio_button :select_address, 'my_address', id: 'address_my_address' %>

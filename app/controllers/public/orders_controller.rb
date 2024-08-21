@@ -16,12 +16,12 @@ class Public::OrdersController < ApplicationController
     @cart_price = ary.sum
     @order.total = @order.fee + @cart_price
     @order.payment = params[:order][:payment]
-    if @order.payment == "credit_card"
-      @order.status = 1
-    else
+    if @order.payment == 'transfer'
       @order.status = 0
+    else
+      @order.status = 1
     end
-  
+
     selected_address_type = params[:order][:select_address]
     case selected_address_type
     when "my_address"
@@ -97,7 +97,6 @@ class Public::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-
   end
 
 

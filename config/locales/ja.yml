@@ -14,6 +14,12 @@ ja:
         in_making: "制作中"
         ready: "発送準備中"
         finish: "発送済み"
+    order_detail:
+      making_status:
+        stop_making: "着手不可"
+        waiting_make: "製作待ち"
+        in_making: "製作中"
+        finish: "製作完了"
   activerecord:
     attributes:
         customer:
