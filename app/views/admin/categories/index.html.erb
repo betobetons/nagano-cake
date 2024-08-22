@@ -23,12 +23,14 @@
             <th class="active px-5"></th>
           </tr>
         </thead>
-      <% @categories.each do |category| %>
-        <tr>
-          <td class="p-3"><%= category.name %></td>
-          <td class="p-3"><%= link_to "編集する", edit_admin_category_path(category), class: 'btn btn-info btn-sm' %></td>
-        </tr>
-      <% end %>
+        <tbody>
+          <% @categories.each do |category| %>
+            <tr>
+              <td class="p-3"><%= category.name %></td>
+              <td class="p-3"><%= link_to "編集する", edit_admin_category_path(category), class: 'btn btn-info btn-sm' %></td>
+            </tr>
+          <% end %>
+      </tbody>
       </table>
     </div>
   </div>
