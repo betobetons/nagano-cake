@@ -1,14 +1,40 @@
-<h1>商品新規登録</h1>
+<div class="container mx-auto container-fluid">
+  <div class="row my-3 justify-content-center">
+    <div class="col-10 px-sm-0">
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+        <span class="pr-3 pl-3" style="font-size: 1.3rem; background-color: #ECECEC; font-weight: bold;">商品新規登録</span>
+      </div>
+      <%= form_with model: @item, url: admin_items_path do |f| %>
+        <table>
+          <tr>
+            <th>商品画像</th>
+            <td><%= f.file_field :image, accept:"image/*" %></td>
+          </tr>
+          <tr>
+            <th>商品名</th>
+            <td><%= f.text_field :name %></td>
+          </tr>
+          <tr>
+            <th>商品説明</th>
+            <td><%= f.text_area :description %></td>
+          <tr>
+            <th>ジャンル</th>
+            <td>
+              <%= select_tag :category_id, options_for_select(Category.all.collect { |c| [c.name, c.id] }), prompt: false %>
 
-<%= form_with model: @item, url: admin_items_path do |f| %>
-  <div><%= f.file_field :image, accept:"image/*" %></div>
-  <div><%= f.text_field :name %></div>
-  <div><%= f.text_area :description %></div>
-  <div>
-    <%= f.label :category_id, "カテゴリ" %>
-    <%= f.collection_select :category_id, Category.all, :id, :name, prompt: "カテゴリを選択" %>
+            </td>
+          </tr>
+          <tr>
+            <th>税抜価格</th>
+            <td><%= f.text_field :price %>円</td>
+          </tr>
+          <tr>
+            <th>販売ステータス</th>
+            <td><!--販売ステータス--></td>
+          </tr>
+        </table>
+        <%= f.submit "新規登録", class: 'btn btn-success btn-lg ml-5', style: 'border-radius: 10px;' %>
+      <% end %>
+    </div>
   </div>
-  <div><%= f.text_field :price %></div>
-  <div><!--販売ステータス--></div>
-  <div><%= f.submit "新規登録" %></div>
-<% end %>
+</div>
