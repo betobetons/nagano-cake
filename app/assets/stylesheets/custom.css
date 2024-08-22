@@ -24,39 +24,35 @@
 }
 
 .custom-btn {
-    /*background-color: #f8f9fa !important;*/
-    color: black;
+    color: black；
 }
 .custom-btn:hover {
     background-color: #e17b34 !important;
 }
 
-
-
-
 html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* ビューポート全体の高さに合わせる */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .custom-header {
-  flex-shrink: 0; /* ヘッダーは縮まないようにする */
+    flex-shrink: 0;
 }
 
 .main-content {
-  flex-grow: 1; /* メインコンテンツが余白を埋める */
-  background-color: #f8f4e6;
+    flex-grow: 1;
+    background-color: #f8f4e6;
 }
 
 .custom-footer {
-  flex-shrink: 0; /* フッターは縮まないようにする */
+    flex-shrink: 0;
     background-color: #6a1917;
     height: 50px;
     display: flex;
