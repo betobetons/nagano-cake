@@ -1,4 +1,5 @@
 class Public::CartsController < ApplicationController
+  before_action :authenticate_customer!
   def index
     @carts = current_customer.carts
     @cart_items = current_customer.carts.all

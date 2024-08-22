@@ -1,4 +1,14 @@
 class Public::OrdersController < ApplicationController
+  before_action :authenticate_customer!
+  before_action :cart_check, only: [:new, :confirm, :create]
+
+  def cart_check
+    unless Cart.find_by(customer_id: current_customer.id)
+      flash[:danger] = "カートが空です"
+      redirect_to items_path
+    end
+  end
+
   def new
     @order = Order.new
     @addresses = current_customer.addresses
