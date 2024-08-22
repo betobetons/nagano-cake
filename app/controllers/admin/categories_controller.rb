@@ -1,4 +1,5 @@
 class Admin::CategoriesController < ApplicationController
+  before_action :authenticate_admin!
   def index
     @categories = Category.all
     @category = Category.new
@@ -19,6 +20,7 @@ class Admin::CategoriesController < ApplicationController
   end
 
   def edit
+    @category = Category.find(params[:id])
   end
 
   private

@@ -12,8 +12,9 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
   namespace :admin do
-    resources :orders, only: %i[show]
-    resources :customers, only: %i[show index edit]
+    resources :order_details, only: %i[update]
+    resources :orders, only: %i[show index update]
+    resources :customers, only: %i[show index edit update]
     resources :categories, only: %i[index edit create update]
     resources :items, only: %i[index new show edit create update]
     get "/" => "homes#top"
@@ -22,16 +23,18 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     get '/about', to:'homes#about', as:'about'
+    delete "carts/destroy_all" => "carts#destroy_all"
     resources :items, only: %i[index show]
     resources :addresses, only: %i[index edit create destroy update]
-    resources :carts, only: %i[index]
+    resources :carts, only: %i[index create destroy update]
     # resources :customers, only: %i[show update edit]
-    resources :orders, only: %i[index show new] do
+    resources :orders, only: %i[index show new create] do
       collection do
         get 'confirm'
         get 'complete'
       end
     end
+
     patch "customers/information/edit" => "customers#update"
     patch "customers/withdraw" => "customers#withdraw"
     get "customers/unsubscribe" => "customers#unsubscribe"

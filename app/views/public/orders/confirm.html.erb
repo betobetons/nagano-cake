@@ -1,2 +1,61 @@
-<h1>Public::Orders#confirm</h1>
-<p>Find me in app/views/public/orders/confirm.html.erb</p>
+<h1>注文情報確認</h1>
+<table>
+  <thead>
+    <tr>
+      <th>商品名</th>
+      <th>単価(税込)</th>
+      <th>数量</th>
+      <th>小計</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @carts.each do |cart| %>
+      <tr>
+        <td><%= image_tag cart.item.image, size: "100x100" %><%= cart.item.name %></td>
+        <td><%= (cart.item.price * 1.1).floor %></td>
+        <td><%= cart.quantity %></td>
+        <td><%= (cart.item.price * 1.1 * cart.quantity).floor %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<table>
+  <tr>
+    <td>送料</td>
+    <td><%= @order_fee %></td>
+  </tr>
+  <tr>
+    <td>商品合計</td>
+    <td><%= @sub_total.round.to_s(:delimited) %></td>
+  </tr>
+  <tr>
+    <td>請求金額</td>
+    <td><%= @total.round.to_s(:delimited) %></td>
+  </tr>
+</table>
+
+支払方法
+<%= @order.payment_i18n %>
+
+
+<% if @selected_address_type == 'my_address' %>
+  <p>自分の住所</p>
+<% elsif @selected_address_type == 'registered_address' %>
+  <p>登録済みの住所</p>
+<% else @selected_address_type == 'new_address' %>
+  <p>新しいお届け先</p>
+<% end %>
+  <p>郵便番号: <%= @order_post_code %></p>
+  <p>住所: <%= @order_address %></p>
+  <p><%= @order_name %></p>
+
+<%= form_with model: @order, url: orders_path, method: :post do |f| %>
+  <%= f.hidden_field :payment, :value => @order.payment %>
+  <%= f.hidden_field :post_code, :value => @order_post_code %>
+  <%= f.hidden_field :address, :value =>  @order_address %>
+  <%= f.hidden_field :name, :value => @order_name %>
+  <%= f.hidden_field :total, :value => @total %>
+  <div>
+    <%= f.submit "注文を確定する" %>
+  </div>
+<% end %>

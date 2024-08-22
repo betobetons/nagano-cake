@@ -1,1 +1,9 @@
-<h1>public#show</h1>
+<h1>商品詳細</h1>
+<div><%= image_tag @item.image, size: "100x100" %></div>
+<div><%= @item.name %></div>
+<div><%= @item.description %></div>
+<div>￥<%= (@item.price * 1.1).floor %>(税込み)</div>
+<%= form_with model: @cart  do |f| %>
+<%= f.hidden_field :item_id, :value => @item.id %>
+<div><%= f.select :quantity, *[1..10], prompt: "個数選択" %><%= f.submit "カートに入れる"%></div>
+<% end %>
