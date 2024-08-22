@@ -1,19 +1,10 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
 
 Admin.create(email: '1@1', password: '123456')
 
-# Customer.create(first_name: '佐藤', last_name: '太郎', first_name_kana: 'サトウ', last_name_kana: 'タロウ', address: '東京都世田谷区', phone: '12345678901', post_code: '123467', email: '1@234', password: '123456', is_active: 'true')
-
-Customer.find_or_create_by!(first_name: '佐藤') do |customer|
-    customer.last_name = '太郎'
-    customer.first_name_kana = 'サトウ'
-    customer.last_name_kana = 'タロウ'
+Customer.find_or_create_by!(first_name: '太郎') do |customer|
+    customer.last_name = '佐藤'
+    customer.first_name_kana = 'タロウ'
+    customer.last_name_kana = 'サトウ'
     customer.address = '東京都世田谷区'
     customer.phone = '12345678901'
     customer.post_code = '1234567'
