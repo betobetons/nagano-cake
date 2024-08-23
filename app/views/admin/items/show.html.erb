@@ -1,15 +1,41 @@
-<h1>商品詳細</h1>
-
-<%= image_tag @item.image, size: '300x300' %>
-<p>商品名 <%= @item.name %></p><br>
-<p>商品説明 <%= @item.description %></p><br>
-ジャンル<br><%= @item.category.name %>
-<p>
-税込み価格<br>
-(税抜き価格)
-</p>
-<p><%= (@item.price * 1.1).floor %>(<%= @item.price %>)円</p>
-販売ステータス
-<%= render 'status', item: @item %>
-<br>
-<%= link_to "編集する", edit_admin_item_path(@item) %>
+<div class="container mx-auto mt-4 container-fluid">
+  <span class="pr-3 pl-3 ml-5" style="font-size: 1.3rem; background-color: #ECECEC; font-weight: bold;">
+    商品詳細
+  </span>
+  <div class="row justify-content-center">
+    <div class="col-4 mt-5 d-flex justify-content-center">
+      <div><%= image_tag @item.image, size: '250x200' %></div>
+    </div>
+    <div class="col-7 mt-5">
+      <table style="margin-bottom: 20px;">
+        <tr>
+          <th style="padding: 10px;">商品名</th>
+          <td style="padding: 10px;"><%= @item.name %></td>
+        </tr>
+        <tr>
+          <th style="padding: 10px;">商品説明</th>
+          <td style="padding: 10px;"><%= @item.description %></td>
+        </tr>
+        <tr>
+          <th style="padding: 10px;">ジャンル</th>
+          <td style="padding: 10px;"><%= @item.category.name %></td>
+        </tr>
+        <tr>
+          <th style="padding: 10px;">
+            税込価格<br>
+            (税抜価格)
+          </th>
+          <td style="padding: 10px;">
+            <%= number_to_currency((@item.price * 1.1).floor, unit: '', delimiter: ',') %>
+            (<%= number_to_currency((@item.price).floor, unit: '', delimiter: ',') %>)円
+          </td>
+        </tr>
+        <tr>
+          <th style="padding: 10px;">販売ステータス</th>
+          <td style="padding: 10px;"><%= render 'status', item: @item %></td>
+        </tr>
+      </table>
+      <%= link_to "編集する", edit_admin_item_path(@item), class: 'btn btn-success btn-lg text-white ml-5', style: 'border-radius: 10px;' %>
+    </div>
+  </div>
+</div>

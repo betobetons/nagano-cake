@@ -1,0 +1,15 @@
+<%= form_with model: item, url: admin_items_path, method: :post do |f| %>
+<tr>
+  <th>
+    <label for="item_is_active" class="d-flex align-items-center">
+      販売ステータス
+    </label>
+  </th>
+  <td class="p-1">
+    <%= f.radio_button :is_active, true %>
+    <%= f.label :is_active_true, '販売中' %>
+    <%= f.radio_button :is_active, false %>
+    <%= f.label :is_active_false, '販売停止中' %>
+  </td>
+</tr>
+<% end %>
