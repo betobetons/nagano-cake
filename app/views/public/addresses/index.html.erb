@@ -1,13 +1,10 @@
-<%= flash[:notice] %>
-<!--タイトルの部分-->
+<%= render 'layouts/errors', obj: @address %>
 <div class="container">
   <div class="row">
     <div class="col-4 my-4 text-center">
       <h3><span style="font-size: 1.3rem; background-color: #ECECEC; font-weight: bold;">配送先登録 / 一覧</span></h3>
     </div>
   </div>
-
-<!--新規登録フォームの部分-->
   <%= form_with model: @address, url: addresses_path, method: :post do |f| %>
     <div class="row mb-2">
       <div class="col-2 text-nowrap">郵便番号(ハイフンなし)</div>
@@ -23,8 +20,5 @@
       <div class="col-6 text-right"><%= f.submit "新規登録", class: 'btn btn-success' %></div>
     </div>
   <% end %>
-
-  <!--登録した住所の一覧表-->
   <%= render 'index_list', addresses: @addresses %>
-
 </div>
