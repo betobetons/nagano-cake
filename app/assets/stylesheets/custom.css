@@ -4,8 +4,8 @@
 }
 
 .custom-header {
-    background-color: #6f5436;
-    height: 80px;
+    background-color: #6a1917;
+    height: 60px;
     display: flex;
     align-items: center;
 }
@@ -17,4 +17,78 @@
 
 .hover-effect:hover {
     color: #f6ae54; /* マウスオーバー時の文字色 */
+}
+
+.fa-search {
+    color: white;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.custom-header {
+    flex-shrink: 0;
+}
+
+.main-content {
+    flex-grow: 1;
+    background-color: #f8f4e6;
+}
+
+.custom-footer {
+    flex-shrink: 0;
+    background-color: #6a1917;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+
+.search-form-5 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 250px;
+    overflow: hidden;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+}
+
+.search-form-5 input {
+    height: 24px;
+    padding: 0px 10px;
+    border: none;
+    box-sizing: border-box;
+    background-color: #f2f2f2;
+    font-size: 12px;
+    outline: none;
+}
+
+.search-form-5 input::placeholder {
+    color: #a43232;
+}
+
+.search-form-5 button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 28px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.custom-btn i {
+    color: #a43232;
+    font-size: 16px;
 }

@@ -8,9 +8,9 @@ class Item < ApplicationRecord
   validates :description, presence: true
   validates :price, presence: true
   validates :image, presence: true
-  
+
   def taxin_price
         price*1.1
   end
-  
+
 end

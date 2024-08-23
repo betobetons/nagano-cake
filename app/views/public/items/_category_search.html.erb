@@ -1,0 +1,16 @@
+<div class="col-2">
+  <table class="w-100 border border-dark text-center">
+    <thead>
+      <tr class="border border-dark">
+        <th>ジャンル検索</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% categories.each do |category| %>
+        <tr>
+          <td class="text-left" style="font-size: 0.8rem; padding: 0.5rem;"><%= category.name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
