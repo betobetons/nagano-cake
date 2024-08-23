@@ -1,17 +1,7 @@
 <%= stylesheet_link_tag 'public/homes', media: 'all' %>
   <div class="content-wrapper" style="display: flex;">
-    <!--ジャンル検索-->
-    <div class="genre-card" style="flex: 2;">
-      <div class="genre-card-title">ジャンル検索</div>
-      <div class="genre-card-body">
-        <ul>
-          <li>ケーキ</a></li>
-          <li>プリン</a></li>
-          <li>焼き菓子</a></li>
-          <li>キャンディ</a></li>
-        </ul>
-      </div>
-    </div>
+    <!--ジャンル検索,-->
+  <%= render 'public/homes/genre_card' %>
   <div class="main-content" style="flex: 10; display: flex; flex-direction: column;">
     <div class="home-box">
       <div class="image-container">

@@ -92,3 +92,55 @@ body {
     color: #a43232;
     font-size: 16px;
 }
+
+.btn-success {
+    background-color: #e5a323;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-success:hover {
+    background-color: #ff8c00;
+}
+
+.btn-danger {
+    background-color: #b22222;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-danger:hover {
+    background-color: #d70035;
+}
+
+.btn-danger {
+    background-color: #b22222;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-danger:hover {
+    background-color: #d70035;
+}
+
+.btn-primary {
+    background-color: #00a497;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #48d1cc;
+}
