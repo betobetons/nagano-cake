@@ -81,7 +81,7 @@ class Public::OrdersController < ApplicationController
     if @selected_address_type == 'my_address'
       @order_post_code = current_customer.post_code
       @order_address = current_customer.address
-      @order_name = "#{current_customer.first_name} #{current_customer.last_name}"
+      @order_name = "#{current_customer.last_name} #{current_customer.first_name}"
 
     elsif @selected_address_type == 'registered_address'
       @selected_address = Address.find_by(id: params[:order][:address_id]) # 登録済み住所を取得
