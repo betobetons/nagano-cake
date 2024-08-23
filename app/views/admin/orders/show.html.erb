@@ -31,16 +31,16 @@
           <td>
             <%= form_with model: @order, url: admin_order_path, method: :patch do |f| %>
             <div class="d-flex">
-              <%= f.select :status, Order.statuses.keys.map { |k| [Order.statuses_i18n[k], k] }, {}, class: "form-control w-50" %>
+              <%= f.select :status, Order.statuses.keys.map { |k| [Order.statuses_i18n[k], k] }, {}, class: "form-control w-75 mr-4" %>
                 <%= f.hidden_field :id, :value => @order.id %>
-            </div>
               <%= f.submit '更新', class: 'btn btn-success' %>
+            </div>
             <% end %>
           </td>
       </tr>
     </table>
   </div>
-  <div class="row">
+  <div class="row" style="position:relative">
     <div class="col-8">
       <table class="table border-top border-bottom">
         <thead>
@@ -70,7 +70,9 @@
         </tbody>
       </table>
     </div>
-    <div class="col-3 offset-1">
+
+    <!--テーブルを右下に固定したい-->
+    <div class="col-3 offset-1" style="position:absolute; bottom:0; right:0;">
       <table>
         <tr>
           <th class="col-sm-3  pb-2">商品合計</th>

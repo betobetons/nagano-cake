@@ -1,43 +1,30 @@
 <%= flash[:notice] %>
-<h1>配送先登録 / 一覧</h1>
-<%= form_with model: @address, url: addresses_path, method: :post do |f| %>
-  <table>
-    <tr>
-      <td>郵便番号(ハイフンなし)</td>
-      <td><%= f.text_field :post_code %></td>
-    </tr>
-    <tr>
-      <td>住所</td>
-      <td><%= f.text_field :address %></td>
-    </tr>
-    <tr>
-      <td>宛名</td>
-      <td><%= f.text_field :name %></td>
-      <td><%= f.submit "新規登録" %></td>
-    </tr>
-  </table>
-<% end %>
+<!--タイトルの部分-->
+<div class="container">
+  <div class="row">
+    <div class="col-4 my-4 text-center">
+      <h3><span style="font-size: 1.3rem; background-color: #ECECEC; font-weight: bold;">配送先登録 / 一覧</span></h3>
+    </div>
+  </div>
 
-  <table>
-    <thead>
-      <tr>
-        <th>郵便番号</th>
-        <th>住所</th>
-        <th>宛名</th>
-        <th colspan="2"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <% @addresses.each do |address| %>
-      </tr>
-        <td><%= address.post_code %></td>
-        <td><%= address.address %></td>
-        <td><%= address.name %></td>
-        <td>
-          <%= link_to "編集する", edit_address_path(address) %>
-          <%= link_to "削除する", address_path(address), method: :delete %>
-        </td>
-      <% end %>
-    </tbody>
-  </table>
+<!--新規登録フォームの部分-->
+  <%= form_with model: @address, url: addresses_path, method: :post do |f| %>
+    <div class="row mb-2">
+      <div class="col-2 text-nowrap">郵便番号(ハイフンなし)</div>
+      <div class="col-3"><%= f.text_field :post_code, class: 'form-control' %></div>
+    </div>
+     <div class="row mb-2">
+      <div class="col-2 text-nowrap">住所</div>
+      <div class="col-7"><%= f.text_field :address, class: 'form-control' %></div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-2">宛名</div>
+      <div class="col-3"><%= f.text_field :name, class: 'form-control' %></div>
+      <div class="col-6 text-right"><%= f.submit "新規登録", class: 'btn btn-success' %></div>
+    </div>
+  <% end %>
+
+  <!--登録した住所の一覧表-->
+  <%= render 'index_list', addresses: @addresses %>
+
+</div>
