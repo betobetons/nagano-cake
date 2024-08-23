@@ -1,45 +1,43 @@
+<%= stylesheet_link_tag 'custom', media: 'all', 'data-turbolinks-track': 'reload' %>
 <%= flash[:notice] %>
-<h1>会員情報編集</h1>
-
-<%= form_with model: @customer, url: customers_information_edit_path do |f| %>
-  <table>
-    <tr>
-      <td>氏名</td>
-      <td>
-        <%= f.text_field :last_name %>
-      </td>
-      <td>
-        <%= f.text_field :first_name %>
-      </td>
-    </tr>
-    <tr>
-      <td>フリガナ</td>
-      <td>
-        <%= f.text_field :last_name_kana %>
-      </td>
-      <td>
-        <%= f.text_field :first_name_kana %>
-      </td>
-    </tr>
-    <tr>
-      <td>郵便番号</td>
-      <td><%= f.text_field :post_code %></td>
-    </tr>
-    <tr>
-      <td>住所</td>
-      <td><%= f.text_field :address %></td>
-    </tr>
-    <tr>
-      <td>電話番号</td>
-      <td><%= f.text_field :phone %></td>
-    </tr>
-    <tr>
-      <td>メールアドレス</td>
-      <td><%= f.text_field :email %></td>
-    </tr>
-    <tr>
-      <td><%= f.submit "編集内容を保存" %></td>
-      <td><%= link_to "退会する", customers_unsubscribe_path %></td>
-    </tr>
-  </table>
-<% end %>
+<div class="container col-8">
+  <div class="row m-4">
+    <span style=" background-color: #ECECEC; font-weight: bold; font-size: 23px">　会員情報編集　</span>
+  </div>
+  <%= form_with model: @customer, url: customers_information_edit_path do |f| %>
+  <div class="row mt-3">
+    <div class="col-4">氏名</div>
+    <div class="col-4 text-left"><%= f.text_field :last_name %></div>
+    <div class="col-4 text-left"><%= f.text_field :first_name %></div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-4">フリガナ</div>
+    <div class="col-4"><%= f.text_field :last_name_kana %></div>
+    <div class="col-4"><%= f.text_field :first_name_kana %></div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-4">郵便番号</div>
+    <div class="col-8"><%= f.text_field :post_code %></div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-4">住所</div>
+    <div class="col-8"><%= f.text_field :address,:size=> 55 %></div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-4">電話番号</div>
+    <div class="col-8"><%= f.text_field :phone %></div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-4">メールアドレス</div>
+    <div class="col-8"><%= f.text_field :email %></div>
+  </div>
+  <div class="row mt-2">
+    <div class="col-4"></div>
+    <div class="col-5">
+    <%= f.submit "編集内容を保存", class: "btn btn-success" %></div>
+    <div class="col-2 text-left">
+    <%= link_to "退会する", customers_unsubscribe_path, class: "btn btn-danger" %>
+    <% end %>
+    </div>
+  </div>
+</div>
