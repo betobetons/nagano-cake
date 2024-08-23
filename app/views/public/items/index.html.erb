@@ -1,28 +1,40 @@
-<%= flash[:danger] %>
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12 px-sm-0 d-flex">
-      <h2>商品一覧</h2><p class="mt-3">(全<%= @items.count %>件)</p>
+<div class="container mt-5">
+  <%= flash[:danger] %>
+  <div class="row justify-content-center">
+  <!--%= render 'category_search', categories: @categories %>-->
+    <div class="col-10">
+      <div class="row d-flex">
+        <h2>商品一覧</h2>
+        <p class="mt-3">(全<%= @items.count %>件)</p>
+      </div>
+
+      <div class="row mt-0 text-center">
+        <table class="w-100 border-0">
+          <% @items.each_slice(4) do |item_slice| %>
+            <tr class="border-0">
+              <% item_slice.each do |item| %>
+                <td class="border-0" style="width: 25%;">
+                  <div class="card w-100 mb-4 bg-transparent border-0">
+                    <%= link_to item_path(item.id) do %>
+                      <p class="img-wrap mb-0"><%= image_tag item.image, size: '150x100', style: 'margin-bottom: 0;' %></p>
+                    <% end %>
+                    <div class="card-body ml-4 p-0 text-left">
+                      <p class="m-1 item-details item-name card-text mb-0" style="font-size: 0.875rem;"><%= item.name %></p>
+                      <% if item.is_active %>
+                        <p class="mt-1 item-details card-text" style="font-size: 0.875rem;">￥<%= item.price %></p>
+                      <% else %>
+                        <p class="text-danger font-weight-bold card-text" style="font-size: 0.875rem;">販売停止中</p>
+                      <% end %>
+                    </div>
+                  </div>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+
+      <%= paginate @items %>
     </div>
   </div>
-  <div class="row mt-0 mb-3 text-center text-xs-center text-sm-center text-md-left">
-    <% @items.each do |item| %>
-      <div class="col-xs-10 col-sm-10 col-md-6 col-lg-3">
-        <div class="card w-100 bg-transparent border-0" style="width: 18rem;">
-          <%= link_to item_path(item.id) do %>
-            <p class="img-wrap"><%= image_tag item.image, size: '100x100' %></p>
-          <% end %>
-          <div class="card-body">
-            <p class="item-details item-name card-text"><%= item.name %></p>
-            <% if item.is_active == true %>
-              <p class="item-details card-text">￥<%= item.price %></p>
-            <% else %>
-              <p class="text-danger font-weight-bold card-text">販売停止中</p>
-            <% end %>
-          </div>          
-        </div>
-      </div>
-    <% end %>
-  </div>
-  <%= paginate @items %>
 </div>
