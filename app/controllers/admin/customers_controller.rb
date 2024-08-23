@@ -19,7 +19,7 @@ class Admin::CustomersController < ApplicationController
       redirect_to admin_customer_path
     else
       @customer = Customer.find(params[:id])
-      flash[:notice] = "変更に失敗しました"
+      flash[:fail] = "変更に失敗しました"
       render :edit
     end
   end
