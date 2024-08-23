@@ -4,7 +4,7 @@ class Address < ApplicationRecord
   validates :post_code, presence: true, length: { is: 7 }
   validates :name, presence: true, length: { in: 1..32 }
   validates :address, presence: true,  length: { minimum: 1 }
-  
+
   def address_display
     '〒' + post_code + ' ' + address + ' ' + name
   end

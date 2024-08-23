@@ -7,6 +7,8 @@
     </div>
   </div>
 
+<%= render 'layouts/errors', obj: @address %>
+
 <!--新規登録フォームの部分-->
   <%= form_with model: @address, url: addresses_path, method: :post do |f| %>
     <div class="row mb-2">
