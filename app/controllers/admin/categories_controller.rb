@@ -8,11 +8,13 @@ class Admin::CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
     if @category.save
+      flash[:notice] = "保存に成功しました"
       redirect_to admin_categories_path
     else
     @categories = Category.all
     @category = Category.new
-      render :index
+    flash[:notice] = "保存に失敗しました"
+    redirect_back(fallback_location: root_path)
     end
   end
 

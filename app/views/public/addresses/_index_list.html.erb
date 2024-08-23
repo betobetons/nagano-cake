@@ -10,18 +10,17 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <% addresses.each do |address| %>
-      </tr>
-      <div class="col-10">
-        <td class="text-nowrap"><%= address.post_code %></td>
-        <td class="text-nowrap"><%= address.address %></td>
-        <td class="text-nowrap"><%= address.name %></td>
-        <td class="text-center text-nowrap">
-          <%= link_to "編集する", edit_address_path(address), class: 'btn btn-success mr-2' %>
-          <%= link_to "削除する", address_path(address), method: :delete, class: 'btn btn-danger' %>
-        </td>
-      </div>
+      <% @addresses.each do |address| %>
+        <% next if address.id.nil? %>
+        <tr>
+          <td class="text-nowrap"><%= address.post_code %></td>
+          <td class="text-nowrap"><%= address.address %></td>
+          <td class="text-nowrap"><%= address.name %></td>
+          <td class="text-center text-nowrap">
+            <%= link_to "編集する", edit_address_path(address), class: 'btn btn-success mr-2' %>
+            <%= link_to "削除する", address_path(address), method: :delete, class: 'btn btn-danger' %>
+          </td>
+        </tr>
       <% end %>
     </tbody>
   </table>

@@ -1,5 +1,6 @@
+<%= flash[:notice] %>
 <div class="container">
-
+<%= render "public/shared/error_messages", resource: @category %>
   <div class="row mt-3">
     <h3><span class="bg-light">ジャンル一覧・追加</span></h3>
     <%= form_with model: @category, url: admin_categories_path do |f| %>
@@ -19,8 +20,8 @@
       <table class="table table-hover w-25 ml-5">
         <thead class="active">
           <tr class="table-light">
-            <th class="active px-5">ジャンル</th>
-            <th class="active px-5"></th>
+            <th class="active px-5" style="pointer-events: none;">ジャンル</th>
+            <th class="active px-5" style="pointer-events: none;"></th>
           </tr>
         </thead>
         <tbody>

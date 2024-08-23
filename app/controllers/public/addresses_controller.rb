@@ -9,13 +9,10 @@ class Public::AddressesController < ApplicationController
   def create
     @address = current_customer.addresses.build(address_params)
     if @address.save
-      flash[:notice] = '住所が作成されました。'
       redirect_to addresses_path
     else
       @addresses = current_customer.addresses
-      @address = Address.new
-      flash[:notice] = "登録に失敗しました"
-      redirect_back(fallback_location: root_path)
+      render :index
     end
   end
 
@@ -26,13 +23,10 @@ class Public::AddressesController < ApplicationController
   def update
     @address = Address.find(params[:id])
     if @address.update(address_params)
-      flash[:notice] = '編集に成功しました。'
       redirect_to addresses_path
     else
       @addresses = current_customer.addresses
-      @address = Address.new
-      flash[:notice] = "編集に失敗しました"
-      redirect_back(fallback_location: root_path)
+      render :edit
     end
   end
 

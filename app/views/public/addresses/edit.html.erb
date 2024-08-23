@@ -1,13 +1,12 @@
-<%= flash[:notice] %>
-<!--タイトル【配送先編集】の部分-->
+
+<%= render 'layouts/errors', obj: @address %>
+
 <div class="container">
   <div class="row">
     <div class="col-4 my-4 text-center">
       <h3><span style="font-size: 1.3rem; background-color: #ECECEC; font-weight: bold;">配送先編集</span></h3>
     </div>
   </div>
-
-<!--編集フォームの部分-->
   <%= form_with model: @address do |f| %>
     <div class="row mb-2">
       <div class="col-2 text-nowrap">郵便番号(ハイフンなし)</div>
@@ -22,6 +21,5 @@
       <div class="col-3"><%= f.text_field :name, class: 'form-control' %></div>
       <div class="col-6 text-right"><%= f.submit "変更内容を保存", class: 'btn btn-success' %></div>
     </div>
-    <% end %>
+  <% end %>
 </div>
-
