@@ -25,7 +25,7 @@ class Public::OrdersController < ApplicationController
       ary << cart.item.price*cart.quantity
     end
     @cart_price = ary.sum
-    @order.total = @order.fee + @cart_price
+    @order.total = @order.fee + ( @cart_price * 1.1)
     @order.payment = params[:order][:payment]
     if @order.payment == 'transfer'
       @order.status = 0
@@ -101,7 +101,6 @@ def confirm
     @order_post_code = params[:order][:post_code]
     @order_address = params[:order][:address]
     @order_name = params[:order][:name]
-
     if @order_post_code.blank? || @order_address.blank? || @order_name.blank?
       flash[:alert] = "住所を入力してください。"
       redirect_to new_order_path and return

@@ -34,16 +34,16 @@
     <div class="col-3 offset-1" style="position:absolute; bottom:0; right:0;">
       <table>
         <tr>
-          <th class="col-sm-3  pb-2">商品合計</th>
-          <td class="col-sm-2 pb-2"><%= number_to_currency((order.total - order.fee).floor, unit: '',delimiter: ',') %></td>
+          <th class="col-sm-3 pb-2 table-active">商品合計</th>
+          <td class="col-sm-2 pb-2 table-active"><%= number_to_currency((order.total - order.fee).floor, unit: '',delimiter: ',') %></td>
         </tr>
         <tr>
-          <th class="col-sm-3  pb-2">送料</th>
-          <td class="col-sm-2  pb-2"><%= number_to_currency((order.fee).floor, unit: '',delimiter: ',') %></td>
+          <th class="col-sm-3  pb-2 table-active">送料</th>
+          <td class="col-sm-2  pb-2 table-active"><%= number_to_currency((order.fee).floor, unit: '',delimiter: ',') %></td>
         </tr>
         <tr>
-          <th class="col-sm-3  pb-2">請求金額合計</th>
-          <td class="col-sm-2  pb-2"><%= number_to_currency((order.total).floor, unit: '',delimiter: ',') %></td>
+          <th class="col-sm-3  pb-2 table-active">請求金額合計</th>
+          <td class="col-sm-2  pb-2 table-active"><%= number_to_currency((order.total).floor, unit: '',delimiter: ',') %></td>
         </tr>
       </table>
     </div>
