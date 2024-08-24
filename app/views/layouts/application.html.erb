@@ -12,43 +12,43 @@
     <%= stylesheet_link_tag 'custom', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
+        <!--ログイン時の名前表示-->
   <body>
     <header class="custom-header py-3">
         <div class="container-fluid px-5 d-flex justify-content-between align-items-center">
-    
-            <% if customer_signed_in? %>
-                <div>
-                    <%= link_to root_path do %>
-                        <%= image_tag 'logo.png', alt: 'NaganoCake Logo', class: 'logo-img' %>
-                    <% end %>
-                </div>
-                <% elsif admin_signed_in? %>
+            <% if admin_signed_in? %>
                 <div>
                     <%= link_to admin_path do %>
                         <%= image_tag 'logo.png', alt: 'NaganoCake Logo', class: 'logo-img' %>
                     <% end %>
                 </div>
-                <% else %>
+            <% elsif customer_signed_in? %>
+                <div class="d-flex align-items-center">
+                    <%= link_to root_path do %>
+                        <%= image_tag 'logo.png', alt: 'NaganoCake Logo', class: 'logo-img' %>
+                    <% end %>
+                    <span class="ml-3 customer-greeting">ようこそ、<%= current_customer.last_name %>さん</span>
+                </div>
+            <% else %>
                 <div>
                     <%= link_to root_path do %>
                         <%= image_tag 'logo.png', alt: 'NaganoCake Logo', class: 'logo-img' %>
                     <% end %>
                 </div>
             <% end %>
-    
+        <!--ログイン別ヘッダー-->
             <div>
-                <% if customer_signed_in? %>
-                    <%= link_to 'マイページ', customers_my_page_path, class: 'text-decoration-none hover-effect mx-3' %>
-                    <%= link_to '商品一覧', items_path, class: 'text-decoration-none hover-effect mx-3' %>
-                    <%= link_to 'カート', carts_path, class: 'text-decoration-none hover-effect mx-3' %>
-                    <%= link_to 'ログアウト', destroy_customer_session_path, method: :delete, class: 'text-decoration-none hover-effect mx-3' %>
-                <% elsif admin_signed_in? %>
+                <% if admin_signed_in? %>
                     <%= link_to '商品一覧', admin_items_path, class: 'text-decoration-none hover-effect mx-3' %>
                     <%= link_to '会員一覧', admin_customers_path, class: 'text-decoration-none hover-effect mx-3' %>
                     <%= link_to '注文履歴一覧', admin_path, class: 'text-decoration-none hover-effect mx-3' %>
                     <%= link_to 'ジャンル一覧', admin_categories_path, class: 'text-decoration-none hover-effect mx-3' %>
                     <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'text-decoration-none hover-effect mx-3' %>
+                <% elsif customer_signed_in? %>
+                    <%= link_to 'マイページ', customers_my_page_path, class: 'text-decoration-none hover-effect mx-3' %>
+                    <%= link_to '商品一覧', items_path, class: 'text-decoration-none hover-effect mx-3' %>
+                    <%= link_to 'カート', carts_path, class: 'text-decoration-none hover-effect mx-3' %>
+                    <%= link_to 'ログアウト', destroy_customer_session_path, method: :delete, class: 'text-decoration-none hover-effect mx-3' %>
                 <% else %>
                     <%= link_to 'About', about_path, class: 'text-decoration-none hover-effect mx-3' %>
                     <%= link_to '商品一覧', items_path, class: 'text-decoration-none hover-effect mx-3' %>
