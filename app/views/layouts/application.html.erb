@@ -38,17 +38,17 @@
             <% end %>
     
             <div>
-                <% if customer_signed_in? %>
-                    <%= link_to 'マイページ', customers_my_page_path, class: 'text-decoration-none hover-effect mx-3' %>
-                    <%= link_to '商品一覧', items_path, class: 'text-decoration-none hover-effect mx-3' %>
-                    <%= link_to 'カート', carts_path, class: 'text-decoration-none hover-effect mx-3' %>
-                    <%= link_to 'ログアウト', destroy_customer_session_path, method: :delete, class: 'text-decoration-none hover-effect mx-3' %>
-                <% elsif admin_signed_in? %>
+                <% if admin_signed_in? %>
                     <%= link_to '商品一覧', admin_items_path, class: 'text-decoration-none hover-effect mx-3' %>
                     <%= link_to '会員一覧', admin_customers_path, class: 'text-decoration-none hover-effect mx-3' %>
                     <%= link_to '注文履歴一覧', admin_path, class: 'text-decoration-none hover-effect mx-3' %>
                     <%= link_to 'ジャンル一覧', admin_categories_path, class: 'text-decoration-none hover-effect mx-3' %>
                     <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'text-decoration-none hover-effect mx-3' %>
+                <% elsif customer_signed_in? %>
+                    <%= link_to 'マイページ', customers_my_page_path, class: 'text-decoration-none hover-effect mx-3' %>
+                    <%= link_to '商品一覧', items_path, class: 'text-decoration-none hover-effect mx-3' %>
+                    <%= link_to 'カート', carts_path, class: 'text-decoration-none hover-effect mx-3' %>
+                    <%= link_to 'ログアウト', destroy_customer_session_path, method: :delete, class: 'text-decoration-none hover-effect mx-3' %>
                 <% else %>
                     <%= link_to 'About', about_path, class: 'text-decoration-none hover-effect mx-3' %>
                     <%= link_to '商品一覧', items_path, class: 'text-decoration-none hover-effect mx-3' %>
