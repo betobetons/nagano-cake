@@ -12,12 +12,16 @@
             <div class="item-price">
                 ￥<%= (@item.price * 1.1).floor %><span class="tax">(税込み)</span>
             </div>
-            <%= form_with model: @cart  do |f| %>
-            <%= f.hidden_field :item_id, :value => @item.id %>
-            <div>
-                <span class="quantity"><%= f.select :quantity, *[1..10] %></span>
-                <span><%= f.submit "カートに入れる", class: "btn btn-success btn-sm"%></span>
-            </div>
+            <% if @item.is_active == true  %>
+                <%= form_with model: @cart  do |f| %>
+                <%= f.hidden_field :item_id, :value => @item.id %>
+                <div>
+                    <span class="quantity"><%= f.select :quantity, *[1..10] %></span>
+                    <span><%= f.submit "カートに入れる", class: "btn btn-success btn-sm"%></span>
+                </div>
+                <% end %>
+            <% else %>
+             <span class="text-danger" style="font-size: 30px">販売停止中</span>
             <% end %>
         </div>
     </div>

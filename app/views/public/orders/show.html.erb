@@ -67,9 +67,9 @@
         <% @order.order_details.each do |order_detail| %>
         <tr>
           <td><%= order_detail.item.name %></td>
-          <td><%= number_to_currency(order_detail.price, :format => "%n%u", :unit => "") %></td>
+          <td><%= number_to_currency(order_detail.price * 1.1, :format => "%n%u", :unit => "") %></td>
           <td><%= order_detail.quantity %></td>
-          <td><%= number_to_currency(order_detail.price * order_detail.quantity, :format => "%n%u", :unit => "") %></td>
+          <td><%= number_to_currency(order_detail.price * 1.1 * order_detail.quantity, :format => "%n%u", :unit => "") %></td>
         </tr>
         <% end %>
       </tbody>

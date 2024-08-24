@@ -10,6 +10,7 @@ class Admin::OrderDetailsController < ApplicationController
     elsif @order.order_details.count == @order.order_details.where(making_status: "finish").count
       @order.update(status: "ready")
     end
+    flash[:notice] = "変更しました"
     redirect_back(fallback_location: root_path)
   end
 
