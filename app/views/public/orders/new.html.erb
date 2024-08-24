@@ -1,32 +1,63 @@
-<h1>注文情報入力</h1>
-<%= form_with model: @order, url: confirm_orders_path, method: :get do |f| %>
-  <h2>支払方法</h2>
-  <%= f.radio_button :payment, 'credit_card', id: 'payment_credit_card' %>
-  <%= f.label :payment_credit_card, Order.payments_i18n[:credit_card], for: 'payment_credit_card' %>
-  <br>
-  <%= f.radio_button :payment, 'transfer', id: 'payment_transfer' %>
-  <%= f.label :payment_transfer, Order.payments_i18n[:transfer], for: 'payment_transfer' %>
-  <h2>お届け先</h2>
-  <!-- 自分の住所 -->
-  <%= f.radio_button :select_address, 'my_address', id: 'address_my_address', checked: true %>
-  <%= f.label :select_address, '自分の住所', for: 'address_my_address' %><br>
-
-  <!-- 登録済み住所 -->
-  <%= f.radio_button :select_address, 'registered_address', id: 'address_registered_address' %>
-  <%= f.label :select_address, '登録済み住所', for: 'address_registered_address' %>
-  <%= f.select :address_id, options_from_collection_for_select(@addresses, :id, :address_display) %><br>
-
-  <!-- 新しい住所 -->
-  <%= f.radio_button :select_address, 'new_address', id: 'address_new_address' %>
-  <%= f.label :select_address, '新しい住所', for: 'address_new_address' %><br>
-
-    <table>
-  <%= f.text_field :post_code, placeholder: "郵便番号" %>
-  <%= f.text_field :address, placeholder: "住所" %>
-  <%= f.text_field :name, placeholder: "宛名" %>
-    </table>
-
-  <div><%= f.submit "確認画面へ進む" %></div>
-<% end %>
-
-
+<%= stylesheet_link_tag 'custom', media: 'all', 'data-turbolinks-track': 'reload' %>
+<div class="container mx-auto container-fluid">
+  <div class="row my-3 justify-content-center">
+    <div class="col-8">
+      <span style="font-size: 1.3rem;">注文情報入力</span>
+    </div>
+    <div class="col-10 px-sm-0">
+      <%= form_with model: @order, url: confirm_orders_path, method: :get do |f| %>
+        <li style="font-size: 1.3rem; font-weight: bold; list-style-type: none;">支払方法</li>
+        <ul style="margin-bottom: 0px;">
+          <%= f.radio_button :payment, 'credit_card', id: 'payment_credit_card' %>
+          <%= f.label :payment_credit_card, Order.payments_i18n[:credit_card], for: 'payment_credit_card' %>
+        </ul>
+        <ul style="margin-bottom: 0px;">
+          <%= f.radio_button :payment, 'transfer', id: 'payment_transfer' %>
+          <%= f.label :payment_transfer, Order.payments_i18n[:transfer], for: 'payment_transfer' %>
+        </ul>
+        <div style="font-size: 1.3rem; font-weight: bold;">お届け先</div>
+        <!-- 自分の住所 -->
+        <ul class="mb-0">
+          <%= f.radio_button :select_address, 'my_address', id: 'address_my_address', checked: true %>
+          <%= f.label :select_address, 'ご自身の住所', for: 'address_my_address', style: "margin: 0;" %>
+        </ul>
+        <ul class="ml-4" style="margin-bottom: 0px; padding-top: 0;">
+          〒<%= @order.customer.post_code %> <%= @order.customer.address %>
+        </ul>
+        <ul class="ml-4" style="margin-bottom: 0px;">
+          <%= @order.customer.last_name %><%= @order.customer.first_name %>
+        </ul>
+        <!-- 登録済み住所 -->
+        <ul style="margin-bottom: 0px;">
+          <%= f.radio_button :select_address, 'registered_address', id: 'address_registered_address' %>
+          <%= f.label :select_address, '登録済住所から選択', for: 'address_registered_address', style: "margin: 0;" %>
+        </ul>
+        <ul class="ml-4 mt-1 mr-1 mb-1" style="margin-bottom: 0px;">
+          <%= f.select :address_id, options_from_collection_for_select(@addresses, :id, :address_display), {}, style: "width: 80%;" %>
+        </ul>
+        <!-- 新しい住所 -->
+        <ul style="margin-bottom: 0px;">
+          <%= f.radio_button :select_address, 'new_address', id: 'address_new_address' %>
+          <%= f.label :select_address, '新しいお届け先', for: 'address_new_address', style: "margin: 0;" %><br>
+        </ul>
+        <div class="pl-5">
+          <table>
+            <tr>
+              <td class="pr-4">郵便番号(ハイフンなし)</td>
+              <td><%= f.text_field :post_code, placeholder: "郵便番号" %></td>
+            </tr>
+            <tr>
+              <td>住所</td>
+              <td><%= f.text_field :address, placeholder: "住所", style: "width: 250%;" %></td>
+            </tr>
+            <tr>
+              <td class="pr-4">宛名</td>
+              <td><%= f.text_field :name, placeholder: "宛名" %></td>
+            </tr>
+          </table>
+        </div>
+        <div class="mt-4 text-center"><%= f.submit "確認画面へ進む", class: 'btn btn-primary px-4'  %></div>
+      <% end %>
+    </div>
+  </div>
+</div>
