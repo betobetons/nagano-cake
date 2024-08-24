@@ -15,7 +15,7 @@
             <%= form_with model: @cart  do |f| %>
             <%= f.hidden_field :item_id, :value => @item.id %>
             <div>
-                <span class="quantity"><%= f.select :quantity, *[1..10], prompt: "個数選択" %></span>
+                <span class="quantity"><%= f.select :quantity, *[1..10] %></span>
                 <span><%= f.submit "カートに入れる", class: "btn btn-success btn-sm"%></span>
             </div>
             <% end %>
