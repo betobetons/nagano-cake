@@ -1,4 +1,4 @@
-
+<%= stylesheet_link_tag 'custom', media: 'all', 'data-turbolinks-track': 'reload' %>
 <%= flash[:fail] %>
 <div class="container mx-auto container-fluid">
   <div class="row my-3 justify-content-center">
@@ -59,7 +59,7 @@
       </td>
     <tr>
       <td class="pb-2"></td>
-      <td class="pb-2 pl-5"><%= f.submit "変更を保存", class: 'btn btn-success mt-3' %></td>
+      <td class="pb-2 pl-5"><%= f.submit "変更を保存", class: 'btn btn-success' %></td>
     </tr>
   </table>
 <% end %>
