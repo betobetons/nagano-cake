@@ -1,62 +1,78 @@
-<h1>注文履歴詳細</h1>
-<h2>注文情報</h2>
-<table>
-    <tbody>
+<div class="container">
+  <div class="row m-5">
+    <span style=" background-color: #ECECEC; font-weight: bold; font-size: 23px">　注文履歴詳細　</span>
+  </div>
+  <div class="row">
+    <div class="col-8">
+      <h2>注文情報</h2>
+    </div>
+    <div class=" col-4">
+      <h2>請求情報</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-8">
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <td class="col-3 bg-light">注文日</td>
+            <td><%= @order.created_at.strftime("%Y/%m/%d") %></td>
+          </tr>
+          <tr>
+            <td class="col-3 bg-light">配送先</td>
+            <td>〒<%= @order.post_code %><br><%= @order.address %><br><%= @order.name %></td>
+          </tr>
+          <tr>
+            <td class="col-3 bg-light">支払方法</td>
+            <td><%= @order.payment_i18n %></td>
+          </tr>
+          <tr>
+            <td class="col-3 bg-light">ステータス</td>
+            <td><%= @order.status_i18n %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-4">
+      <table class="table table-bordered">
+        <tbody>
+            <tr>
+              <td class="col-4 bg-light">商品合計</td>
+              <td><%= number_to_currency(@order.total - @order.fee , :format => "%n%u", :unit => "円") %></td>
+            </tr>
+            <tr>
+              <td class="col-4 bg-light">配送料</td>
+              <td><%= number_to_currency(@order.fee , :format => "%n%u", :unit => "円") %></td>
+            </tr>
+            <tr>
+              <td class="col-4 bg-light">請求額</td>
+              <td><%= number_to_currency(@order.total , :format => "%n%u", :unit => "円") %></td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row m-2"><h2>注文内容</h2></div>
+  <div class="row col-10">
+    <table class="table table-bordered">
+      <thead>
         <tr>
-          <td>注文日</td>
-          <td><%= @order.created_at.strftime("%Y/%m/%d") %></td>
+          <th class="col-7 bg-light">商品</th>
+          <th class="col-3 bg-light">単価(税込)</th>
+          <th class="col-1 bg-light">個数</th>
+          <th class="col-2 bg-light">小計</th>
         </tr>
-        <tr>
-          <td>配送先</td>
-          <td>〒<%= @order.post_code %><br><%= @order.address %><br><%= @order.name %></td>
-        </tr>
-        <tr>
-          <td>支払方法</td>
-          <td><%= @order.payment_i18n %></td>
-        </tr>
-        <tr>
-          <td>ステータス</td>
-          <td><%= @order.status_i18n %></td>
-        </tr>
-    </tbody>
-</table>
-
-<h2>請求情報</h2>
-<table>
-    <tbody>
-        <tr>
-          <td>商品合計</td>
-          <td><%= @order.total - @order.fee %></td>
-        </tr>
-        <tr>
-          <td>配送料</td>
-          <td><%=  @order.fee %></td>
-        </tr>
-        <tr>
-          <td>請求額</td>
-          <td><%= @order.total %></td>
-        </tr>
-    </tbody>
-</table>
-
-<h2>注文内容</h2>
-<table>
-    <thead>
-        <tr>
-            <th>商品</th>
-            <th>単価(税込)</th>
-            <th>個数</th>
-            <th>小計</th>
-        </tr>
-    </thead>
-    <tbody>
+      </thead>
+      <tbody>
         <% @order.order_details.each do |order_detail| %>
         <tr>
           <td><%= order_detail.item.name %></td>
-          <td><%= order_detail.price %></td>
+          <td><%= number_to_currency(order_detail.price * 1.1, :format => "%n%u", :unit => "") %></td>
           <td><%= order_detail.quantity %></td>
-          <td><%= order_detail.price * order_detail.quantity %></td>
+          <td><%= number_to_currency(order_detail.price * 1.1 * order_detail.quantity, :format => "%n%u", :unit => "") %></td>
         </tr>
         <% end %>
-    </tbody>
-</table>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,52 +1,69 @@
-<h1><%= @customer.first_name %><%= @customer.last_name %>さんの会員情報編集</h1>
-<%= flash[:notice] %>
+<%= stylesheet_link_tag 'custom', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= flash[:fail] %>
+<div class="container mx-auto container-fluid">
+  <div class="row my-3 justify-content-center">
+    <div class="col-10 px-sm-0">
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+         <span class="mb-3 pr-3 pl-3" style="font-size: 1.3rem; background-color: #ECECEC; font-weight: bold;"><%= @customer.last_name %><%= @customer.first_name %>さんの会員情報編集</span>
+        <div style="text-align: right;">
+        </div>
+      </div>
+
+
 <%= form_with model: @customer, url: admin_customer_path, method: :patch do |f| %>
   <table>
     <tr>
-      <td>会員ID</td>
-      <td><%= @customer.id %></td>
+      <td class="pb-2">会員ID</td>
+      <td class="pb-2 pl-5"><%= @customer.id %></td>
     </tr>
     <tr>
-      <td>氏名</td>
-      <td>
-        <%= f.text_field :first_name %>
+      <td class="pb-2">氏名</td>
+      <td class="pb-2 pl-5">
+        <%= f.text_field :last_name, class: 'form-control border border-secondary' %>
       </td>
-      <td>
-        <%= f.text_field :last_name %>
-      </td>
-    </tr>
-    <tr>
-      <td>フリガナ</td>
-      <td>
-        <%= f.text_field :first_name_kana %>
-      </td>
-      <td>
-        <%= f.text_field :last_name_kana %>
+      <td class="pl-4 pb-2 pl-2">
+        <%= f.text_field :first_name, class: 'form-control border border-secondary' %>
       </td>
     </tr>
     <tr>
-      <td>郵便番号</td>
-      <td><%= f.text_field :post_code %></td>
+      <td class="pb-2">フリガナ</td>
+      <td class="pb-2 pl-5">
+        <%= f.text_field :last_name_kana, class: 'form-control border border-secondary' %>
+      </td>
+      <td class="pl-4 pb-2 pl-2">
+        <%= f.text_field :first_name_kana, class: 'form-control border border-secondary' %>
+      </td>
     </tr>
     <tr>
-      <td>住所</td>
-      <td><%= f.text_field :address %></td>
+      <td class="pb-2">郵便番号</td>
+      <td class="pb-2 pl-5"><%= f.text_field :post_code, class: 'form-control border border-secondary' %></td>
     </tr>
     <tr>
-      <td>電話番号</td>
-      <td><%= f.text_field :phone %></td>
+      <td class="pb-2">住所</td>
+      <td colspan="2" class="pb-2 pl-5"><%= f.text_field :address, class: 'form-control border border-secondary' %></td>
     </tr>
     <tr>
-      <td>メールアドレス</td>
-      <td><%= f.text_field :email %></td>
+      <td class="pb-2">電話番号</td>
+      <td class="pb-2 pl-5"><%= f.text_field :phone, class: 'form-control border border-secondary' %></td>
     </tr>
-      <td>会員ステータス</td>
-      <td><%= f.radio_button :is_active, :true %>
-        <%= f.label :is_active, "有効" %></td>
-      <td><%= f.radio_button :is_active, :false %>
-        <%= f.label :is_active, "退会" %></td>
     <tr>
-      <td><%= f.submit "編集内容を保存" %></td>
+      <td class="pb-2">メールアドレス</td>
+      <td class="pb-2 pl-5"><%= f.text_field :email, class: 'form-control border border-secondary' %></td>
+    </tr>
+      <td class="pb-2">会員ステータス</td>
+      <td class="pb-2 pl-5">
+        <%= f.radio_button :is_active, :true %>
+        <%= f.label :is_active, "有効"%>
+        <%= f.radio_button :is_active, :false, class: 'ml-4' %>
+        <%= f.label :is_active, "退会", class: 'text-right' %>
+      </td>
+    <tr>
+      <td class="pb-2"></td>
+      <td class="pb-2 pl-5"><%= f.submit "変更を保存", class: 'btn btn-success' %></td>
     </tr>
   </table>
 <% end %>
+
+    </div>
+  </div>
+</div>

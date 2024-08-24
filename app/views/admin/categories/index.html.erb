@@ -1,20 +1,39 @@
-ジャンル一覧・追加
-<%= form_with model: @category, url: admin_categories_path do |f| %>
-  <div>
-    ジャンル名　<%= f.text_field :name %>
-    <%= f.submit "新規登録", class: 'btn btn-success' %>
-  </div
-<% end %>
+<%= stylesheet_link_tag 'custom', media: 'all', 'data-turbolinks-track': 'reload' %>
+<div class="container">
+<%= flash[:notice] %>
+<%= render "public/shared/error_messages", resource: @category %>
+  <div class="row mt-3">
+    <span class="pr-3 pl-3" style="font-size: 1.3rem; background-color: #ECECEC; font-weight: bold;">ジャンル一覧・追加</span>
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th class="active">ジャンル</th>
-    </tr>
-  </thead>
-<% @categories.each do |category| %>
-  <tr>
-    <td><%= category.name %></td>
-    <td><%= link_to "編集する", edit_admin_category_path(category) %></td>
-  </tr>
-<% end %>
+  <%= form_with model: @category, url: admin_categories_path do |f| %>
+  <div class="row mt-4">
+      <div>
+        <span class="px-5">ジャンル名</span>
+        <span class="pl-2 pr-5"><%= f.text_field :name %></span>
+        <span><%= f.submit "新規登録", class: 'btn btn-success' %></span>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col">
+      <table class="table table-hover w-25 ml-5">
+        <thead class="active">
+          <tr class="table-light">
+            <th class="active px-5" style="pointer-events: none;">ジャンル</th>
+            <th class="active px-5" style="pointer-events: none;"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @categories.each do |category| %>
+            <tr>
+              <td class="p-3"><%= category.name %></td>
+              <td class="p-3"><%= link_to "編集する", edit_admin_category_path(category), class: 'btn btn-info btn-sm' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,33 +1,51 @@
-<h1>会員一覧</h1>
+<div class="container mx-auto container-fluid">
+  <div class="row my-3 justify-content-center">
+    <div class="col-10 px-sm-0">
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+          <span class="pr-3 pl-3" style="font-size: 1.3rem; background-color: #ECECEC; font-weight: bold;">会員一覧</span>
+        <div style="text-align: right;">
+        </div>
+      </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>会員ID</th>
-      <th>氏名</th>
-      <th>メールアドレス</th>
-      <th>ステータス</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <% @customers.each do |customer| %>
-    </tr>
-    <td><%= customer.id %></td>
-    <td>
-      <%= link_to admin_customer_path(customer) do %>
-        <%= customer.first_name %><%= customer.last_name %>
-      <% end %>
-    </td>
-    <td><%= customer.email %></td>
-    <td>
-      <% if customer.is_active == true %>
-        有効
-      <% else %>
-        退会
-      <% end %>
-    </td>
-    <% end %>
-  </tbody>
-</table>
-<%= paginate @customers %>
+
+    <div class="col-12 mt-3">
+      <table class="w-100" style="border-top: 2px solid gray; border-bottom: 2px solid gray;">
+        <thead>
+          <tr>
+            <th class="table-active" style="padding: 10px; border-bottom:2px;">会員ID</th>
+            <th class="table-active" style="padding: 10px; border-bottom:2px;">氏名</th>
+            <th class="table-active" style="padding: 10px; border-bottom:2px;">メールアドレス</th>
+            <th class="table-active" style="padding: 10px; border-bottom:2px;">ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <% @customers.each do |customer| %>
+          </tr>
+          <td style="padding: 10px;"><%= customer.id %></td>
+          <td style="padding: 10px;">
+            <%= link_to admin_customer_path(customer) do %>
+              <%= customer.last_name %><%= customer.first_name %>
+            <% end %>
+          </td>
+          <td style="padding: 10px;"><%= customer.email %></td>
+          <td style="padding: 10px;">
+            <% if customer.is_active == true %>
+              有効
+            <% else %>
+              退会
+            <% end %>
+          </td>
+          <% end %>
+        </tbody>
+      </table>
+          <div class="d-flex justify-content-center mt-3">
+          <%= paginate @customers %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

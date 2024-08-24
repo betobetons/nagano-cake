@@ -12,6 +12,7 @@ class Public::OrdersController < ApplicationController
   def new
     @order = Order.new
     @addresses = current_customer.addresses
+    @order.customer = current_customer
   end
 
   def create
@@ -24,7 +25,7 @@ class Public::OrdersController < ApplicationController
       ary << cart.item.price*cart.quantity
     end
     @cart_price = ary.sum
-    @order.total = @order.fee + @cart_price
+    @order.total = @order.fee + ( @cart_price * 1.1)
     @order.payment = params[:order][:payment]
     if @order.payment == 'transfer'
       @order.status = 0
@@ -63,43 +64,52 @@ class Public::OrdersController < ApplicationController
       @carts.destroy_all
       redirect_to complete_orders_path
     else
-      render :items
+      flash[:alert] = "住所が見つかりませんでした。"
+      redirect_to items_path
     end
   end
 
-  def confirm
-    @order = Order.new(order_params)
-    @selected_address_type = params[:order][:select_address]  # select_addressの値を取得
-    @order_fee = 800
-    @carts = current_customer.carts
-    @cart_items = current_customer.carts.all
-    @sub_total = @cart_items.inject(0) { |sum, item| sum + item.sum_of_price }
-    @total = @order_fee + @sub_total
-    @payment = params[:order][:payment]
+def confirm
+  @order = Order.new(order_params)
+  @selected_address_type = params[:order][:select_address]  # select_addressの値を取得
+  @order_fee = 800
+  @carts = current_customer.carts
+  @cart_items = current_customer.carts.all
+  @sub_total = @cart_items.inject(0) { |sum, item| sum + item.sum_of_price }
+  @total = @order_fee + @sub_total
+  @payment = params[:order][:payment]
 
-    # 選択された住所タイプに応じて住所情報を設定
-    if @selected_address_type == 'my_address'
-      @order_post_code = current_customer.post_code
-      @order_address = current_customer.address
-      @order_name = "#{current_customer.first_name} #{current_customer.last_name}"
+  # 選択された住所タイプに応じて住所情報を設定
+  case @selected_address_type
+  when 'my_address'
+    @order_post_code = current_customer.post_code
+    @order_address = current_customer.address
+    @order_name = "#{current_customer.last_name} #{current_customer.first_name}"
 
-    elsif @selected_address_type == 'registered_address'
-      @selected_address = Address.find_by(id: params[:order][:address_id]) # 登録済み住所を取得
-      if @selected_address
-        @order_post_code = @selected_address.post_code
-        @order_address = @selected_address.address
-        @order_name = @selected_address.name
-      else
-        flash[:alert] = "住所が見つかりませんでした。"
-        redirect_to new_order_path and return
-      end
-
-    else @selected_address_type == 'new_address'
-      @order_post_code = params[:order][:post_code]
-      @order_address = params[:order][:address]
-      @order_name = params[:order][:name]
+  when 'registered_address'
+    @selected_address = Address.find_by(id: params[:order][:address_id]) # 登録済み住所を取得
+    if @selected_address
+      @order_post_code = @selected_address.post_code
+      @order_address = @selected_address.address
+      @order_name = @selected_address.name
+    else
+      flash[:alert] = "住所が見つかりませんでした。"
+      redirect_to new_order_path and return
     end
+
+  when 'new_address'
+    @order_post_code = params[:order][:post_code]
+    @order_address = params[:order][:address]
+    @order_name = params[:order][:name]
+    if @order_post_code.blank? || @order_address.blank? || @order_name.blank?
+      flash[:alert] = "住所を入力してください。"
+      redirect_to new_order_path and return
+    end
+  else
+    flash[:alert] = "不正な住所選択です。"
+    redirect_to new_order_path and return
   end
+end
 
   def index
     @orders = current_customer.orders.all

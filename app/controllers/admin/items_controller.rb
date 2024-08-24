@@ -1,5 +1,6 @@
 class Admin::ItemsController < ApplicationController
   before_action :authenticate_admin!
+  protect_from_forgery
   def new
     @item = Item.new
   end
@@ -32,7 +33,9 @@ class Admin::ItemsController < ApplicationController
     if @item.update(item_params)
       redirect_to admin_items_path, notice: "商品を編集しました"
     else
-      redirect_to edit_admin_item_path(@item)
+      @item = Item.find(params[:id])
+      flash[:notice] = "保存に失敗しました"
+      render :edit
     end
   end
 

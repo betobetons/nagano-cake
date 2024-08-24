@@ -1,3 +1,4 @@
+<%= stylesheet_link_tag 'custom', media: 'all', 'data-turbolinks-track': 'reload' %>
 <div class="container mx-auto mt-4 container-fluid">
   <span class="pr-3 pl-3 ml-5" style="font-size: 1.3rem; background-color: #ECECEC; font-weight: bold;">
     商品詳細
@@ -35,7 +36,7 @@
           <td style="padding: 10px;"><%= render 'status', item: @item %></td>
         </tr>
       </table>
-      <%= link_to "編集する", edit_admin_item_path(@item), class: 'btn btn-success btn-lg text-white ml-5', style: 'border-radius: 10px;' %>
+      <%= link_to "編集する", edit_admin_item_path(@item), class: 'btn btn-success' %>
     </div>
   </div>
 </div>

@@ -1,0 +1,51 @@
+<!--注文詳細 製品ごとの表・金額内訳-->
+<div class="row" style="position:relative">
+    <div class="col-8">
+      <table class="table border-top border-bottom">
+        <thead>
+          <tr>
+            <th class="table-active">商品名</th>
+            <th class="table-active">単価(税込)</th>
+            <th class="table-active">数量</th>
+            <th class="table-active">小計</th>
+            <th class="table-active">製作ステータス</th>
+            <th class="table-active"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <% order_details.each do |order_detail| %>
+          <tr>
+          <td class="col-4"><%= order_detail.item.name %></td>
+          <td class="col-2"><%= number_to_currency((order_detail.price * 1.1).floor, unit: '',delimiter: ',') %></td>
+          <td><%= order_detail.quantity %></td>
+          <td><%= number_to_currency((order_detail.price * 1.1 * order_detail.quantity).floor, unit: '',delimiter: ',') %></td>
+          <%= form_with model: order_detail, url: admin_order_detail_path(order_detail), method: :patch do |f| %>
+          <td><%= f.select :making_status, OrderDetail.making_statuses.keys.map { |k| [OrderDetail.making_statuses_i18n[k], k] }, { selected: order_detail.making_status }, class: "form-control" %></td>
+        　<td><%= f.submit '更新', class: 'btn btn-success' %></td>
+            <% end %>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <!--テーブルを右下に固定したい-->
+    <div class="col-3 offset-1" style="position:absolute; bottom:0; right:0;">
+      <table>
+        <tr>
+          <th class="col-sm-3 pb-2 table-active">商品合計</th>
+          <td class="col-sm-2 pb-2 table-active"><%= number_to_currency((order.total - order.fee).floor, unit: '',delimiter: ',') %></td>
+        </tr>
+        <tr>
+          <th class="col-sm-3  pb-2 table-active">送料</th>
+          <td class="col-sm-2  pb-2 table-active"><%= number_to_currency((order.fee).floor, unit: '',delimiter: ',') %></td>
+        </tr>
+        <tr>
+          <th class="col-sm-3  pb-2 table-active">請求金額合計</th>
+          <td class="col-sm-2  pb-2 table-active"><%= number_to_currency((order.total).floor, unit: '',delimiter: ',') %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

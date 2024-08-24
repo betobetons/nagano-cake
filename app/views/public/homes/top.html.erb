@@ -1,35 +1,78 @@
-<div class="d-flex justify-content-center align-items-start min-vh-100 flex-column" style="margin: 0; padding: 0;">
-  <div class="home-box mx-auto my-3">
-    <p class="home-text">ようこそ、ながのCAKEへ！<br>
-      このサイトは、ケーキ販売のECサイトになります。<br>
-      会員でない方も商品の閲覧はできますが、<br>
-      購入には会員登録が必要になります。
-    </p>
-  </div>
-
-  <div class="container mt-0 new-item">
-    <h2>新着商品</h2>
-    <div class="row justify-content-center">
-      <% @items.first(4).each do |item| %>
-        <div class="col-md-3 col-sm-6">
-          <div class="card w-100 bg-transparent border-0">
-            <%= link_to item_path(item.id) do %>
-              <div class="img-wrap"><%= image_tag item.image, size: '150x100' %></div>
-            <% end %>
-            <div class="card-body">
-              <p class="card-text"><%= item.name %></p>
-              <% if item.is_active %>
-                <p class="card-text">￥<%= item.price %></p>
-              <% else %>
-                <p class="card-text text-danger">販売停止中</p>
+<%= stylesheet_link_tag 'public/homes', media: 'all' %>
+  <div class="content-wrapper" style="display: flex;">
+    <!--ジャンル検索-->
+  <%= render 'public/homes/genre_card' %>
+  <div class="main-content" style="flex: 10; display: flex; flex-direction: column;">
+    <div class="home-box">
+      <div class="image-container">
+        <div id="image-slider">
+          <img src="<%= asset_path('top1.jpg') %>" alt="トップ画像1" class="slider-img" style="display: block;">
+          <img src="<%= asset_path('top2.jpg') %>" alt="トップ画像2" class="slider-img" style="display: none;">
+          <img src="<%= asset_path('top3.jpg') %>" alt="トップ画像3" class="slider-img" style="display: none;">
+          <img src="<%= asset_path('top4.jpg') %>" alt="トップ画像4" class="slider-img" style="display: none;">
+        </div>
+        <p class="home-text">ようこそ、ながのCAKEへ！<br>
+          このサイトは、ケーキ販売のECサイトになります。<br>
+          会員でない方も商品の閲覧はできますが、<br>
+          購入には会員登録が必要になります。
+        </p>
+      </div>
+    </div>
+    <div class="container mt-0 new-item">
+      <h2>新着商品</h2>
+      <div class="row justify-content-center">
+        <% @items.first(4).each do |item| %>
+          <div class="col-md-3 col-sm-6">
+            <div class="card w-100 bg-transparent border-0">
+              <%= link_to item_path(item.id) do %>
+                <div class="img-wrap"><%= image_tag item.image, size: '150x100' %></div>
               <% end %>
+              <div class="card-body">
+                <p class="card-text"><%= item.name %></p>
+                <% if item.is_active %>
+                  <p class="card-text">￥<%= item.price %></p>
+                <% else %>
+                  <p class="card-text text-danger">販売停止中</p>
+                <% end %>
+              </div>
             </div>
           </div>
-        </div>
-      <% end %>
-    </div>
-    <div class="all-items-show-button my-3">
-      <div class="text-right"><%= link_to "全ての商品を見る»", items_path %></div>
+        <% end %>
+      </div>
+      <div class="all-items-show-button my-3">
+        <div class="text-right"><%= link_to "全ての商品を見る»", items_path %></div>
+      </div>
     </div>
   </div>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    let index = 0; // 現在の画像インデックス
+    const images = document.querySelectorAll('.slider-img');
+    const totalImages = images.length;
+
+    function changeImage() {
+        const oldIndex = index;
+        index = (index + 1) % totalImages; // 次の画像インデックスを計算
+
+        images[index].style.display = 'block'; // 次の画像を先に表示
+        images[index].style.opacity = '0'; // 次の画像を透明に設定
+
+        setTimeout(() => {
+            images[oldIndex].style.opacity = '0'; // 現在の画像をフェードアウト
+        }, 100); // フェードアウト開始前にわずかな遅延を設定
+
+        setTimeout(() => {
+            images[oldIndex].style.display = 'none'; // フェードアウトした画像を非表示に
+            images[index].style.opacity = '1'; // 次の画像をフェードイン
+        }, 1000); // フェードアウト時間に合わせる
+    }
+
+    // 初期設定
+    images[index].style.display = 'block';
+    images[index].style.opacity = '1';
+
+    // 画像を5秒ごとに切り替える
+    setInterval(changeImage, 10000);
+});
+</script>

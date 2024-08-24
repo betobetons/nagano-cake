@@ -1,3 +1,141 @@
-// Place all the styles related to the public/homes controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+.content-wrapper {
+  display: flex;
+  width: 100%;
+  padding: 15px;
+}
+
+.genre-card {
+  flex: 2;
+  max-width: 200px;
+  margin-right: 10px;
+  height: 250px;
+  background-color: #fdf4db;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.genre-card-title {
+  background-color: #6a1917;
+  color: white;
+  padding: 10px;
+  font-size: 1.2rem;
+  text-align: center;
+  border-bottom: 2px solid #6e4a2e;
+}
+
+.genre-card-body {
+  padding: 10px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.main-content {
+  flex: 10;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.home-box {
+  width: 100%;
+  position: relative;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 10px;
+}
+
+.home-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 1.25rem;
+  text-align: center;
+  padding: 10px 20px;
+  border-radius: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.new-item {
+  width: 100%;
+  padding-top: 10px;
+}
+
+.img-wrap {
+  width: 100%;
+  text-align: left;
+}
+
+.card-body {
+  padding-left: 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.all-items-show-button {
+  text-align: left;
+}
+
+.col.text-center {
+  margin-bottom: 30px;
+}
+
+.about-image img {
+  border-radius: 10px;
+}
+
+.item-name {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.item-text {
+  margin-bottom: 50px;
+}
+
+.item-price {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.tax {
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+.quantity {
+  padding-right: 20px;
+}
+
+.slider-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0; // 初期状態で透明に
+    transition: opacity 1s ease; // 透明度の変化にトランジションを適用
+}
