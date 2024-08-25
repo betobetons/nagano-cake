@@ -1,0 +1,15 @@
+// update.js.erb
+
+// カートの小計と合計金額を更新するための処理
+$("tr[data-cart-id='<%= @cart.id %>'] .subtotal").text("<%= number_to_currency((@cart.item.price * 1.1 * @cart.quantity).floor, unit: '',delimiter: ',') %>");
+$(".total-price").text("<%= number_to_currency(@sub_total.round.to_s(:delimited), unit: '', delimiter: ',') %>");
+
+// フラッシュメッセージを特定の要素の上に表示
+$("table:first").before('<div class="alert alert-success flash-message">個数を変更しました。</div>');
+
+// フラッシュメッセージを自動的に消す処理
+setTimeout(function() {
+  $(".alert").fadeOut("slow", function() {
+    $(this).remove();
+  });
+}, 3000);

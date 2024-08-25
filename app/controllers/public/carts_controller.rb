@@ -23,11 +23,13 @@ class Public::CartsController < ApplicationController
   def update
     @cart = Cart.find(params[:id])
     if @cart.update(cart_params)
-      flash[:notice] = "カートが更新されました。"
+      @sub_total = current_customer.carts.inject(0) { |sum, item| sum + item.sum_of_price }
+      respond_to do |format|
+        format.js
+      end
     else
-      flash[:alert] = "カートの更新に失敗しました。"
+      redirect_to carts_path
     end
-    redirect_to carts_path
   end
 
   def destroy
