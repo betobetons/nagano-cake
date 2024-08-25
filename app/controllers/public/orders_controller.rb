@@ -56,7 +56,7 @@ class Public::OrdersController < ApplicationController
         @carts.each do |cart|
           OrderDetail.create!(order_id: @order.id, item_id: cart.item_id, price: cart.item.price, quantity: cart.quantity, making_status: 'waiting_make')
         end
-      else @order.status == 'waiting_payment'
+      elsif @order.status == 'waiting_payment'
         @carts.each do |cart|
           OrderDetail.create!(order_id: @order.id, item_id: cart.item_id, price: cart.item.price, quantity: cart.quantity, making_status: 'stop_making')
         end
