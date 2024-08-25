@@ -7,38 +7,45 @@
   </div>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "public/shared/error_messages", resource: resource %>
-
   <div class="row  justify-content-end">
     <div class="col-4">名前</div>
-    <div class="col-4 text-right">
-      <span class="field">
-          <%= f.label :"姓" %>
+      <div class="col-4 text-right d-flex align-items-center justify-content-end">
+        <span class="field mr-2">
+          <%= f.label :"姓", class: 'mb-0' %>
+        </span>
+        <span class="field">
           <%= f.text_field :last_name, autofocus: true, :placeholder => "石川" %>
-      </span>
+        </span>
+      </div>
+      <div class="col-4 text-right d-flex align-items-center justify-content-end">
+        <span class="field mr-2">
+          <%= f.label :"名", class: 'mb-0' %>
+        </span>
+        <span class="field">
+          <%= f.text_field :first_name, :placeholder => "五右衛門" %>
+        </span>
+      </div>
     </div>
-    <div class="col-4 text-right">
-      <span class="field">
-        <%= f.label :"名"%>
-        <%= f.text_field :first_name, :placeholder => "五右衛門" %>
-      </span>
-    </div>
-  </div>
-  <div class="row mt-2 justify-content-end">
-    <div class="col-4">フリガナ</div>
-    <div class="col-4 text-right">
-      <span class="field">
-        <%= f.label :"セイ"%>
-        <%= f.text_field :last_name_kana, :placeholder => "イシカワ" %>
-      </span>
-    </div>
-    <div class="col-4 text-right">
-      <span class="field">
-      <%= f.label :"メイ"%>
-      <%= f.text_field :first_name_kana, :placeholder => "ゴエモン" %>
-      </span>
-    </div>
-  </div>
-  <div class="row mt-2 justify-content-end">
+    <div class="row mt-2 justify-content-end">
+      <div class="col-4">フリガナ</div>
+        <div class="col-4 text-right d-flex align-items-center justify-content-end">
+          <span class="field mr-2">
+            <%= f.label :"セイ"%>
+          </span>
+          <span class="field">
+            <%= f.text_field :last_name_kana, :placeholder => "イシカワ" %>
+          </span>
+        </div>
+        <div class="col-4 text-right d-flex align-items-center justify-content-end">
+          <span class="field mr-2">
+            <%= f.label :"メイ"%>
+          </span>
+          <span class="field">
+            <%= f.text_field :first_name_kana, :placeholder => "ゴエモン" %>
+          </span>
+        </div>
+      </div>
+    <div class="row mt-2 justify-content-end">
     <div class="col-4">
       <div class="field"><%= f.label :"メールアドレス" %></div>
     </div>
@@ -94,7 +101,7 @@
     <div class="col-4 text-right">
       <div class="actions">
         <%= f.submit "           新規登録           ", class: "btn btn-success " %>
-        <% end %> 
+        <% end %>
       </div>
     </div>
     <div class="col-4"></div>
