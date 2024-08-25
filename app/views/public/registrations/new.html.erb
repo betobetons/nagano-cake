@@ -1,5 +1,6 @@
 <%= stylesheet_link_tag 'custom', media: 'all', 'data-turbolinks-track': 'reload' %>
 <div class="container">
+  <%= render "public/shared/error_messages", resource: resource %>
   <div class=" row m-5" >
     <div class="col m-1">
      <span style=" background-color: #ECECEC; font-weight: bold; font-size: 23px">新規会員登録</span>
