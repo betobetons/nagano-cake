@@ -1,41 +1,43 @@
 <%= stylesheet_link_tag 'custom', media: 'all', 'data-turbolinks-track': 'reload' %>
 <div class="container">
-  <div class=" row mt-5 mb-5" >
-    <div class="col m-1 ">
-     <span style=" background-color: #ECECEC; font-weight: bold; font-size: 23px">　ログイン　</span>
+  <div class="row my-4">
+    <div class="col-8 mx-auto text-center">
+      <p style="background-color: #f5deb3; padding: 5px;">会員の方はこちらからログイン</p>
     </div>
   </div>
-  <div class="row ml-4 mb-3">
-    <span style="background-color: #ECECEC">会員の方はこちらからログイン</span>
-  </div>
-  
-  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="row mt-3">
-      <div class="field col-3 text-right"><%= f.label :email %></div>
-      <div class="field col-7 text-left"><%= f.email_field :email, autofocus: true,:size=> 50, autocomplete: "email" %></div>
 
-    </div>
-    <div class="row mt-3">
-      <div class="field col-3 text-right">
-        <%= f.label :password %></div>
-        <div class="field col-7 text-left"><%= f.password_field :password,:size=> 50, autocomplete: "current-password" %></div>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="row mb-3">
+      <div class="col-8 mx-auto">
+        <div class="text-end">
+          <%= f.label :email, class: 'form-label' %>
+        </div>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
       </div>
-  <div class="row">  
-  <div class="col-3"></div>
-    <div class="actions col-7 mt-4 text-left">
-      <%= f.submit "　　ログイン　　", class: "btn btn-primary" %>
+    </div>
+    <div class="row mb-4">
+      <div class="col-8 mx-auto">
+        <div class="text-end">
+          <%= f.label :password, class: 'form-label' %>
+        </div>
+        <%= f.password_field :password, autocomplete: "current-password", class: 'form-control' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-8 mx-auto text-center">
+        <%= f.submit "ログイン", class: "btn btn-primary btn-lg" %>
+      </div>
     </div>
   <% end %>
-  </div>
-  <div class="row ml-4 mt-3">
-    <div class="col">
-      <span style="background-color: #ECECEC">　会員登録がお済みで無い方　</span>
-    </div>
-  </div>  
-  <div class="row mt-3 ml-5">
-    <div class="col  text-left">
-    <%= render "public/shared/links" %>
+
+  <div class="row mt-4">
+    <div class="col-8 mx-auto text-center">
+      <p style="background-color: #f5deb3; padding: 5px;">会員登録がお済みで無い方</p>
     </div>
   </div>
+  <div class="row mt-3">
+    <div class="col-8 mx-auto text-center">
+      <%= render "public/shared/links" %>
+    </div>
   </div>
 </div>

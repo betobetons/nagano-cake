@@ -2,50 +2,51 @@
 <div class="container-fluid">
   <%= flash[:notice] %>
   <div class="row my-3 justify-content-center">
-    <div class="col-7 m-4">
-    <span class="pr-3 pl-3" style="font-size: 1.3rem; background-color: #ECECEC; font-weight: bold;">商品編集</span>
+    <div class="col-2 m-4">
+      <h2 class="mb-2 text-center" style="font-size: 1.3rem; background-color: #f5deb3;">商品編集</class>
+      </div>
     </div>
-  </div>
-  <div class="row my-3 justify-content-center">
-    <div class="col-5">
-      <%= form_with model: @item, url: admin_item_path do |f| %>
-        <table>
-          <tr>
-            <th>商品画像</th>
-            <td class="pt-1 pb-1">
-              <%= f.file_field :image %>
-            </td>
-          </tr>
-          <tr>
-            <th>商品名</th>
-            <td class="p-1">
-              <%= f.text_field :name %>
-            </td>
-          </tr>
-          <tr>
-            <th class="pt-3" style="vertical-align: top;">商品説明</th>
-            <td>
-              <%= f.text_area :description, class: "form-control", style: 'height: 150px;color: #6c757d;', placeholder: 'ここに説明文を記述します', onfocus: "this.style.color='black';" %>
-            </td>
-          </tr>
-          <tr>
-            <th>ジャンル</th>
-            <td class="p-1">
-              <%= f.collection_select :category_id, Category.all, :id, :name %>
-            </td>
-          </tr>
-          <tr>
-            <th>税抜価格</th>
-            <td class="p-1">
-              <%= f.text_field :price, class: "form-control", style: 'color: #6c757d;', placeholder: '1000', onfocus: "this.style.color='black';" %><td>円</td>
-            </td>
-          </tr>
-          <%= render 'is_active', item: @item %>
-        </table>
-        <div class="row my-3 justify-content-center">
-          <%= f.submit "変更を保存", class: 'btn btn-success' %>
-        </div>
-      <% end %>
+    <div class="row my-3 justify-content-center">
+      <div class="col-5">
+        <%= form_with model: @item, url: admin_item_path do |f| %>
+          <table>
+            <tr>
+              <th>商品画像</th>
+              <td class="pt-1 pb-1">
+                <%= f.file_field :image %>
+              </td>
+            </tr>
+            <tr>
+              <th>商品名</th>
+              <td class="p-1">
+                <%= f.text_field :name %>
+              </td>
+            </tr>
+            <tr>
+              <th class="pt-3" style="vertical-align: top;">商品説明</th>
+              <td>
+                <%= f.text_area :description, class: "form-control", style: 'height: 150px;color: #6c757d;', placeholder: 'ここに説明文を記述します', onfocus: "this.style.color='black';" %>
+              </td>
+            </tr>
+            <tr>
+              <th>ジャンル</th>
+              <td class="p-1">
+                <%= f.collection_select :category_id, Category.all, :id, :name %>
+              </td>
+            </tr>
+            <tr>
+              <th>税抜価格</th>
+              <td class="p-1">
+                <%= f.text_field :price, class: "form-control", style: 'color: #6c757d;', placeholder: '1000', onfocus: "this.style.color='black';" %><td>円</td>
+              </td>
+            </tr>
+            <%= render 'is_active', item: @item %>
+          </table>
+          <div class="row my-3 justify-content-center">
+            <%= f.submit "変更を保存", class: 'btn btn-success' %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

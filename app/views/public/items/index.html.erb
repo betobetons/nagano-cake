@@ -2,7 +2,7 @@
 <div class="container mt-5">
   <%= flash[:danger] %>
   <div class="row justify-content-center">
-  <!--%= render 'category_search', categories: @categories %-->
+    <!--%= render 'category_search', categories: @categories %>-->
     <div class="col-10">
       <div class="row d-flex">
         <h2>商品一覧</h2>
@@ -16,7 +16,9 @@
                 <td class="border-0" style="width: 25%;">
                   <div class="card w-100 mb-4 bg-transparent border-0">
                     <%= link_to item_path(item.id) do %>
-                      <p class="img-wrap mb-0" style= "text-align: left;"><%= image_tag item.image, size: '150x100', style: 'margin-bottom: 0;' %></p>
+                      <p class="img-wrap mb-0" style="text-align: left;">
+                        <%= image_tag item.image, size: '150x100', style: 'margin-bottom: 0;', loading: 'lazy' %>
+                      </p>
                     <% end %>
                     <div class="card-body ml-4 p-0 text-left">
                       <p class="m-1 item-details item-name card-text mb-0" style="font-size: 0.875rem;"><%= item.name %></p>
@@ -32,7 +34,7 @@
             </tr>
           <% end %>
         </table>
-      </div
+      </div>
       <%= paginate @items %>
     </div>
   </div>

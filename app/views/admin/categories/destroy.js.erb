@@ -1,0 +1,10 @@
+// 対象の行を削除
+$("#category_<%= @category.id %>").remove();
+
+// フラッシュメッセージを表示
+$(".flash-message").html("<%= j flash[:notice] %>").fadeIn();
+
+// 3秒後にフラッシュメッセージを非表示
+setTimeout(function() {
+  $(".flash-message").fadeOut();
+}, 3000);

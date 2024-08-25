@@ -1,0 +1,23 @@
+// フラッシュメッセージを表示
+$(".flash-message").html("<%= j flash[:notice] %>").fadeIn();
+
+// 3秒後にフラッシュメッセージを非表示
+setTimeout(function() {
+  $(".flash-message").fadeOut();
+}, 3000);
+
+// 新しいカテゴリをテーブルに追加
+$("table tbody").append(`
+  <tr id="category_<%= @category.id %>">
+    <td class="p-3"><%= @category.name %></td>
+    <td class="p-3 text-center">
+      <%= link_to '編集する', edit_admin_category_path(@category), class: 'btn btn-info btn-sm' %>
+    </td>
+    <td class="p-3 text-center">
+      <%= link_to '削除', admin_category_path(@category), method: :delete, remote: true, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger btn-sm' %>
+    </td>
+  </tr>
+`);
+
+// フォームをリセットする
+$("form")[0].reset();

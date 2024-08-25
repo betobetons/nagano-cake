@@ -1,7 +1,11 @@
 <!--注文・配送先情報のテーブル-->
 <div class="container pt-3">
   <div class="my-3">
-    <span class="pr-3 pl-3" style="font-size: 1.3rem; background-color: #ECECEC; font-weight: bold;">注文履歴詳細</span>
+    <div class="row text-center">
+      <div class="col-2">
+        <h2 class="mb-2" style="font-size: 1.3rem; background-color: #f5deb3;">注文履歴詳細</h2>
+      </div>
+    </div>
   </div>
   <div class="row">
     <table>
@@ -32,7 +36,7 @@
           <td>
             <%= form_with model: order, url: admin_order_path, method: :patch do |f| %>
             <div class="d-flex">
-              <%= f.select :status, Order.statuses.keys.map { |k| [Order.statuses_i18n[k], k] }, {}, class: "form-control w-75 mr-4" %>
+              <%= f.select :status, Order.statuses.keys.map { |k| [Order.statuses_i18n[k], k] }, {}, class: "form-control w-75 mr-4", style: "font-weight: bold;" %>
                 <%= f.hidden_field :id, :value => order.id %>
               <%= f.submit '更新', class: 'btn btn-success' %>
             </div>

@@ -25,7 +25,7 @@
           <div class="col-md-3 col-sm-6">
             <div class="card w-100 bg-transparent border-0">
               <%= link_to item_path(item.id) do %>
-                <div class="img-wrap"><%= image_tag item.image, size: '150x100' %></div>
+                <div class="img-wrap"><%= image_tag item.image, size: '150x100', loading: 'lazy' %></div>
               <% end %>
               <div class="card-body">
                 <p class="card-text"><%= item.name %></p>

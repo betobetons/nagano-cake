@@ -1,6 +1,8 @@
 class Admin::ItemsController < ApplicationController
   before_action :authenticate_admin!
-  protect_from_forgery
+  before_action :set_item, only: [:show, :edit, :update]
+  before_action :set_categories, only: [:new, :create, :edit, :update]
+
   def new
     @item = Item.new
   end
@@ -10,15 +12,12 @@ class Admin::ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def edit
-    @item = Item.find(params[:id])
   end
 
   def create
-    @categories = Category.all
     @item = Item.new(item_params)
     if @item.save
       redirect_to admin_items_path, notice: "商品を登録しました"
@@ -28,21 +27,25 @@ class Admin::ItemsController < ApplicationController
   end
 
   def update
-    @categories = Category.all
-    @item = Item.find(params[:id])
     if @item.update(item_params)
       redirect_to admin_items_path, notice: "商品を編集しました"
     else
-      @item = Item.find(params[:id])
-      flash[:notice] = "保存に失敗しました"
+      flash[:alert] = "保存に失敗しました"
       render :edit
     end
   end
 
-
   private
+
+  def set_item
+    @item = Item.find(params[:id])
+  end
+
+  def set_categories
+    @categories = Category.all
+  end
+
   def item_params
     params.require(:item).permit(:price, :name, :description, :image, :category_id, :is_active)
   end
-
 end

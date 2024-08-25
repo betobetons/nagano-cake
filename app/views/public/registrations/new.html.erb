@@ -1,122 +1,106 @@
 <%= stylesheet_link_tag 'custom', media: 'all', 'data-turbolinks-track': 'reload' %>
 <div class="container">
   <%= render "public/shared/error_messages", resource: resource %>
-  <div class=" row m-5" >
-    <div class="col m-1">
-     <span style=" background-color: #ECECEC; font-weight: bold; font-size: 23px">新規会員登録</span>
+  <div class="row my-4">
+    <div class="col-6 mx-auto text-center">
+      <p style="background-color: #f5deb3; font-weight: bold; font-size: 18px; padding: 5px;">新規会員登録</p>
     </div>
   </div>
+
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
-  <div class="row  justify-content-end">
-    <div class="col-4">名前</div>
-      <div class="col-4 text-right d-flex align-items-center justify-content-end">
-        <span class="field mr-2">
-          <%= f.label :"姓", class: 'mb-0' %>
-        </span>
-        <span class="field">
-          <%= f.text_field :last_name, autofocus: true, :placeholder => "石川" %>
-        </span>
-      </div>
-      <div class="col-4 text-right d-flex align-items-center justify-content-end">
-        <span class="field mr-2">
-          <%= f.label :"名", class: 'mb-0' %>
-        </span>
-        <span class="field">
-          <%= f.text_field :first_name, :placeholder => "五右衛門" %>
-        </span>
-      </div>
-    </div>
-    <div class="row mt-2 justify-content-end">
-      <div class="col-4">フリガナ</div>
-        <div class="col-4 text-right d-flex align-items-center justify-content-end">
-          <span class="field mr-2">
-            <%= f.label :"セイ"%>
-          </span>
-          <span class="field">
-            <%= f.text_field :last_name_kana, :placeholder => "イシカワ" %>
-          </span>
+    <%= render "public/shared/error_messages", resource: resource %>
+    <div class="row mb-3 justify-content-center">
+      <div class="col-3">
+        <div class="text-end">
+          <%= f.label :last_name, class: 'mb-0' %>
         </div>
-        <div class="col-4 text-right d-flex align-items-center justify-content-end">
-          <span class="field mr-2">
-            <%= f.label :"メイ"%>
-          </span>
-          <span class="field">
-            <%= f.text_field :first_name_kana, :placeholder => "ゴエモン" %>
-          </span>
+        <%= f.text_field :last_name, autofocus: true, placeholder: "石川", class: 'form-control' %>
+      </div>
+      <div class="col-3">
+        <div class="text-end">
+          <%= f.label :first_name, class: 'mb-0' %>
         </div>
-      </div>
-    <div class="row mt-2 justify-content-end">
-    <div class="col-4">
-      <div class="field"><%= f.label :"メールアドレス" %></div>
-    </div>
-    <div class="col-4 text-right">
-      <%= f.email_field :email, autocomplete: "email",:placeholder => "example@sample.com" %></div>
-    <div class="col-4"></div>
-  </div>
-  <div class="row mt-2 justify-content-end">
-    <div class="col-4">
-      <div class="field"><%= f.label :"郵便番号(ハイフンなし)"%></div>
-    </div>
-    <div class="col-4 text-right"><%= f.text_field :post_code, :placeholder => "1234567" %></div>
-    <div class="col-4"></div>
-  </div>
-  <div class="row mt-2 ">
-    <div class="col-4">
-      <div class="field"><%= f.label :"住所"%></div>
-    </div>
-    <div class="col-8 text-right"><%= f.text_field :address, :size=> 72, :placeholder => "東京都渋谷区道玄坂1丁目10番8号渋谷道玄坂東急ビル" %></div>
-  </div>
-  <div class="row mt-2 ">
-    <div class="col-4">
-      <div class="field"><%= f.label :"電話番号(ハイフンなし)"%></div>
-    </div>
-    <div class="col-4 text-right"><%= f.text_field :phone, :placeholder => "09012345678"  %></div>
-    <div class="col-4"></div>
-  </div>
-  <div class="row mt-2 ">
-    <div class="col-4">
-      <div class="field">
-        <%= f.label :password %>
-        <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> 文字以上)</em>
-        <% end %>
+        <%= f.text_field :first_name, placeholder: "五右衛門", class: 'form-control' %>
       </div>
     </div>
-    <div class="col-4 text-right">
-      <%= f.password_field :password, autocomplete: "new-password" %>
-    </div>
-  </div>
-  <div class="row mt-2 ">
-    <div class="col-4">
-      <div class="field">
-        <%= f.label :password_confirmation %>
+    <div class="row mb-3 justify-content-center">
+      <div class="col-3">
+        <div class="text-end">
+          <%= f.label :last_name_kana, class: 'mb-0' %>
+        </div>
+        <%= f.text_field :last_name_kana, placeholder: "イシカワ", class: 'form-control' %>
+      </div>
+      <div class="col-3">
+        <div class="text-end">
+          <%= f.label :first_name_kana, class: 'mb-0' %>
+        </div>
+        <%= f.text_field :first_name_kana, placeholder: "ゴエモン", class: 'form-control' %>
       </div>
     </div>
-    <div class="col-4 text-right">
-      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-    </div>
-  </div>
-  <div class="row mt-2 ">
-    <div class="col-4"></div>
-    <div class="col-4 text-right">
-      <div class="actions">
-        <%= f.submit "           新規登録           ", class: "btn btn-success " %>
-        <% end %>
+    <div class="row mb-3">
+      <div class="col-6 mx-auto">
+        <div class="text-end">
+          <%= f.label :email, class: 'mb-0' %>
+        </div>
+        <%= f.email_field :email, autocomplete: "email", placeholder: "example@sample.com", class: 'form-control' %>
       </div>
     </div>
-    <div class="col-4"></div>
-  </div>
-  <div class="row ml-4 mt-3 justify-content-center">
-    <div class="col-4">
-   <span style=" background-color: #ECECEC; font-weight: bold;font-size: 23px">既に登録済みの方</span>
+    <div class="row mb-3">
+      <div class="col-6 mx-auto">
+        <div class="text-end">
+          <%= f.label :post_code, class: 'mb-0' %>
+        </div>
+        <%= f.text_field :post_code, placeholder: "1234567", class: 'form-control' %>
+      </div>
     </div>
-    <div class="col-8"></div>
+    <div class="row mb-3">
+      <div class="col-6 mx-auto">
+        <div class="text-end">
+          <%= f.label :address, class: 'mb-0' %>
+        </div>
+        <%= f.text_field :address, size: 72, placeholder: "東京都渋谷区道玄坂1丁目10番8号渋谷道玄坂東急ビル", class: 'form-control' %>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-6 mx-auto">
+        <div class="text-end">
+          <%= f.label :phone, class: 'mb-0' %>
+        </div>
+        <%= f.text_field :phone, placeholder: "09012345678", class: 'form-control' %>
+      </div>
+    </div>
+    <div class="row mb-3 justify-content-center">
+      <div class="col-3">
+        <div class="text-end">
+          <%= f.label :password, class: 'mb-0' %>
+          <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> 文字以上)</em>
+          <% end %>
+        </div>
+        <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
+      </div>
+      <div class="col-3">
+        <div class="text-end">
+          <%= f.label :password_confirmation, class: 'mb-0' %>
+        </div>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-8 mx-auto text-center">
+        <%= f.submit "新規登録", class: "btn btn-success" %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="row mt-3">
+    <div class="col-6 mx-auto text-center">
+      <p style="background-color: #f5deb3; font-weight: bold; font-size: 18px;">既に登録済みの方</p>
+    </div>
   </div>
-  <div class="row mt-3 justify-content-center">
-    <div class="col ml-5">
+  <div class="row ">
+    <div class="col-6 mx-auto text-center">
       <%= render "public/shared/links" %>
     </div>
-    <div class="col"></div>
   </div>
 </div>

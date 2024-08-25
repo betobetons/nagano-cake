@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
         <%= render 'public/homes/genre_card' %>
         <div class="col-4 mt-2 px-5">
-            <%= image_tag @item.image, size: '300x250' %>
+            <%= image_tag @item.image, size: '300x250', loading: 'lazy' %>
         </div>
         <div class="col-6 mt-2 px-5">
             <h2 class="item-name"><%= @item.name %></h2>

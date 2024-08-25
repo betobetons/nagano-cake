@@ -1,0 +1,14 @@
+// フォームをリセットします
+$("#address_form")[0].reset();
+
+// アドレスのリストを更新します
+$("#address-list").append('<tr>' +
+  '<td><%= j @address.post_code %></td>' +
+  '<td><%= j @address.address %></td>' +
+  '<td><%= j @address.name %></td>' +
+  '<td><a href="/addresses/<%= j @address.id %>/edit" class="btn btn-primary">編集</a></td>' +
+  '<td><a data-method="delete" href="/addresses/<%= j @address.id %>" class="btn btn-danger">削除</a></td>' +
+'</tr>');
+
+// 成功メッセージを表示します
+alert('アドレスが正常に追加されました。');

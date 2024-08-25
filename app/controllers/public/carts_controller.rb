@@ -1,9 +1,9 @@
 class Public::CartsController < ApplicationController
   before_action :authenticate_customer!
+
   def index
     @carts = current_customer.carts
-    @cart_items = current_customer.carts.all
-    @sub_total = @cart_items.inject(0) { |sum, item| sum + item.sum_of_price }
+    @sub_total = calculate_sub_total(@carts)
   end
 
   def create
@@ -11,41 +11,52 @@ class Public::CartsController < ApplicationController
 
     if @cart
       @cart.quantity += cart_params[:quantity].to_i
-      @cart.save
-      redirect_to carts_path
     else
       @cart = current_customer.carts.new(cart_params)
-      @cart.save
+    end
+
+    if @cart.save
       redirect_to carts_path
+    else
+      flash[:alert] = 'カートに追加できませんでした。'
+      redirect_back(fallback_location: root_path)
     end
   end
 
   def update
-    @cart = Cart.find(params[:id])
+    @cart = current_customer.carts.find(params[:id])
+    
     if @cart.update(cart_params)
-      @sub_total = current_customer.carts.inject(0) { |sum, item| sum + item.sum_of_price }
+      @sub_total = calculate_sub_total(current_customer.carts)
       respond_to do |format|
         format.js
       end
     else
-      redirect_to carts_path
+      flash[:alert] = 'カートの更新に失敗しました。'
+      redirect_back(fallback_location: carts_path)
     end
   end
 
   def destroy
-    @cart = Cart.find(params[:id])
+    @cart = current_customer.carts.find(params[:id])
     @cart.destroy
-    redirect_back(fallback_location: root_path)
+    @sub_total = calculate_sub_total(current_customer.carts)
+    redirect_back(fallback_location: carts_path)
   end
 
   def destroy_all
-    Cart.where(customer_id: current_customer.id).destroy_all
-    redirect_back(fallback_location: root_path)
+    current_customer.carts.destroy_all
+    flash[:notice] = 'カートを空にしました。'
+    redirect_back(fallback_location: carts_path)
   end
 
   private
 
   def cart_params
     params.require(:cart).permit(:quantity, :item_id)
+  end
+
+  def calculate_sub_total(carts)
+    carts.inject(0) { |sum, cart| sum + cart.sum_of_price }
   end
 end
