@@ -1,8 +1,6 @@
 <%= stylesheet_link_tag 'custom', media: 'all', 'data-turbolinks-track': 'reload' %>
 <div class="container mx-auto container-fluid">
-<%= flash[:notice] %>
-<%=flash[:alert] %>
-  <div class="row my-3 justify-content-center">
+  <div class="row justify-content-center">
     <div class="col-sm-10 px-sm-0 offset-sm-1">
       <div class="d-flex justify-content-center align-items-center">
         <span style="font-size: 36px; color: #ff6f61; font-weight: bold; text-shadow: 1.5px 1.5px 3px rgba(0, 0, 0, 0.4); margin-right: 5px;">
@@ -28,25 +26,30 @@
           </tr>
           <tbody>
             <% @carts.each do |cart| %>
-              <%= form_with model: cart, url: cart_path(cart), local: true do |f| %>
-              <tr>
-                <td class="d-flex align-items-center">
-                  <%= image_tag cart.item.image, size: "80x50", class: "me-2" %>
-                  <span class="ml-3 d-flex align-items-center" style="font-weight: bold;">
-                    <%= cart.item.name %>
-                  </span>
-                </td>
-                <td class=" ml-3 text-left align-middle"><%= number_to_currency((cart.item.price * 1.1).floor, unit: '',delimiter: ',') %></td>
-                <td class="text-center align-middle">
-                  <div class="d-flex align-items-center justify-content-center">
-                    <%= f.select :quantity, *[1..10], class: "form-select me-2" %>
-                    <div class="ml-1"><%= f.submit "変更", class: "btn btn-success btn-sm" %></div>
-                  </div>
-                </td>
-                <td class="ml-3 text-left align-middle"><%= number_to_currency((cart.item.price * 1.1 * cart.quantity).floor, unit: '',delimiter: ',')%></td>
-                <td class="text-center align-middle"><%= link_to "削除する", cart_path(cart), method: :delete, class: "btn btn-danger" %></td>
-              </tr>
-              <% end %>
+              <%= form_with model: cart, url: cart_path(cart), method: :patch, local: false, data: { turbolinks: false } do |f| %>
+                <tr data-cart-id="<%= cart.id %>">
+                  <!-- 商品名と画像 -->
+                  <td class="d-flex align-items-center">
+                    <%= image_tag cart.item.image, size: "80x50", class: "me-2" %>
+                    <span class="ml-3 d-flex align-items-center" style="font-weight: bold;">
+                      <%= cart.item.name %>
+                    </span>
+                  </td>
+                  <!-- 単価 -->
+                  <td class="ml-3 text-left align-middle"><%= number_to_currency((cart.item.price * 1.1).floor, unit: '',delimiter: ',') %></td>
+                  <!-- 数量 -->
+                  <td class="text-center align-middle">
+                    <div class="d-flex align-items-center justify-content-center">
+                      <%= f.select :quantity, *[1..10], class: "form-select me-2" %>
+                      <div class="ml-1"><%= f.submit "変更", class: "btn btn-success btn-sm" %></div>
+                    </div>
+                  </td>
+                  <!-- 小計 -->
+                  <td class="ml-3 text-left align-middle subtotal"><%= number_to_currency((cart.item.price * 1.1 * cart.quantity).floor, unit: '',delimiter: ',') %></td>
+                  <!-- 削除ボタン -->
+                  <td class="text-center align-middle"><%= link_to "削除する", cart_path(cart), method: :delete, class: "btn btn-danger" %></td>
+                  <% end %>
+                </tr>
             <% end %>
           </tbody>
         </thead>
@@ -63,7 +66,7 @@
         <table class="table table-bordered">
           <tr>
             <th class="table-active">合計金額</th>
-            <td><%= number_to_currency(@sub_total.round.to_s(:delimited), unit: '', delimiter: ',') %></td>
+            <td class="total-price"><%= number_to_currency(@sub_total.round.to_s(:delimited), unit: '', delimiter: ',') %></td>
           </tr>
         </table>
       </div>
